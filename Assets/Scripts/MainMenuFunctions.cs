@@ -6,25 +6,25 @@ public class MainMenuFunctions : MonoBehaviour
 {
     public void LoadGameLevel1()
     {
-        //SceneManager.LoadScene("Level1");
+        SceneManager.LoadScene("Level1");
         Debug.Log("Holy moly you're playing the game frfr ong");
     }
 
     public void LoadGameLevel2()
     {
-        //SceneManager.LoadScene("Level2");
+        SceneManager.LoadScene("Level2");
         Debug.Log("Holy moly you're playing the game 2 frfr ong");
     }
 
     public void LoadGameLevel3()
     {
-        //SceneManager.LoadScene("Level3");
+        SceneManager.LoadScene("Level3");
         Debug.Log("Holy moly you're playing the game 3 frfr ong");
     }
 
     public void LoadGameTest()
     {
-        //SceneManager.LoadScene("TestingGrounds");
+        SceneManager.LoadScene("TestingGround");
         Debug.Log("Holy moly you're not playing the game cause you wanna 'test'? lame");
     }
 
