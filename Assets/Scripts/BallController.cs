@@ -7,7 +7,7 @@ public class BallController : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     Rigidbody rb;
     [SerializeField]
-    private float launchForce;
+    private float maxHorizontalLaunchForce, maxVerticalLaunchForce;
 
     private Vector2 deltaVector, startDragPosition, endDragPosition;
 
@@ -24,7 +24,6 @@ public class BallController : MonoBehaviour
     {
         if (context.interaction is SlowTapInteraction) 
         {
-            Debug.Log("Slow Tap");
             if (context.started)
             {
                 ShowLaunchingUI();
@@ -64,9 +63,12 @@ public class BallController : MonoBehaviour
         endDragPosition = deltaVector / 10.00f;
         Vector2 dragDifference = startDragPosition - endDragPosition;
         Debug.Log($"Start: {startDragPosition} - End: {endDragPosition} is: {dragDifference}");
-        Vector3 force = new Vector3(dragDifference.x, dragDifference.y, dragDifference.y);
+        Vector3 force = 
+            new(Mathf.Min(dragDifference.x, maxHorizontalLaunchForce), 
+            Mathf.Min(dragDifference.y, maxVerticalLaunchForce),
+            Mathf.Min(dragDifference.y, maxVerticalLaunchForce));
         Debug.Log(force);
-        rb.AddForce(force, ForceMode.Impulse);
+        rb.AddForce(force, ForceMode.VelocityChange);
     }
 
 

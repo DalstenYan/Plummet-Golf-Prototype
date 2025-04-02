@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class CameraController : MonoBehaviour
+public class BallFollow : MonoBehaviour
 {
     Transform playerTransform;
     Vector3 cameraOffset;
@@ -11,7 +11,7 @@ public class CameraController : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         transform.position = playerTransform.position + cameraOffset;
     }
