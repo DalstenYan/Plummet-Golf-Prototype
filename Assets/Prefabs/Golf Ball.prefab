@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2624142521709869634}
   - component: {fileID: 120603300823671852}
   - component: {fileID: 6507777936014353711}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Golf Ball
   m_TagString: Untagged
   m_Icon: {fileID: 0}
