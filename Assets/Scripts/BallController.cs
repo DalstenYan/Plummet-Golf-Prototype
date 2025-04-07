@@ -14,6 +14,8 @@ public class BallController : MonoBehaviour
     private double pauseInputTime;
     private PlayerInput playerInput;
 
+    private SaveLastLocation saveLastLocation;
+
 
     private Vector2 deltaVector, startDragPosition, endDragPosition;
 
@@ -23,6 +25,7 @@ public class BallController : MonoBehaviour
         Cursor.visible = false;
         rb = GetComponent<Rigidbody>();
         playerInput = GetComponent<PlayerInput>();
+        saveLastLocation = GetComponent<SaveLastLocation>();
 
     }
 
@@ -79,6 +82,7 @@ public class BallController : MonoBehaviour
     private void LaunchBall() 
     {
         //TODO
+        saveLastLocation.newLastLocation();
         endDragPosition = deltaVector / 10.00f;
         Vector2 dragDifference = startDragPosition - endDragPosition;
         Debug.Log($"Start: {startDragPosition} - End: {endDragPosition} is: {dragDifference}");
@@ -108,5 +112,12 @@ public class BallController : MonoBehaviour
 
         playerInput.SwitchCurrentActionMap(playerInput.currentActionMap.name == "Player" ? "UI" : "Player");
         Debug.Log("Action Map Changed to: " + playerInput.currentActionMap);
+    }
+    public void onLastLocationInput(InputAction.CallbackContext context)
+    {
+        if (context.performed==true)
+        {
+            saveLastLocation.backToLastLocation();
+        }
     }
 }
