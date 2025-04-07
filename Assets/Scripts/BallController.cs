@@ -11,6 +11,11 @@ public class BallController : MonoBehaviour
     private float maxHorizontalLaunchForce, maxVerticalLaunchForce;
     [SerializeField]
     CinemachineInputAxisController lookController;
+    private double pauseInputTime;
+    private PlayerInput playerInput;
+
+    private SaveLastLocation saveLastLocation;
+
 
     private Vector2 deltaVector, startDragPosition, endDragPosition;
 
@@ -19,6 +24,9 @@ public class BallController : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         rb = GetComponent<Rigidbody>();
+        playerInput = GetComponent<PlayerInput>();
+        saveLastLocation = GetComponent<SaveLastLocation>();
+
     }
 
     /// <summary>
@@ -42,6 +50,17 @@ public class BallController : MonoBehaviour
         
     }
 
+    public void OnPauseInput(InputAction.CallbackContext context)
+    {
+
+        if (context.performed && (context.startTime != pauseInputTime))
+        {
+            pauseInputTime = context.startTime;
+            //TogglePauseControls();
+            PauseMenu.pauseMenu.OnPause();
+        }
+    }
+
     public void OnMouseDelta(InputAction.CallbackContext context) 
     {
         deltaVector += context.ReadValue<Vector2>();
@@ -63,6 +82,7 @@ public class BallController : MonoBehaviour
     private void LaunchBall() 
     {
         //TODO
+        saveLastLocation.newLastLocation();
         endDragPosition = deltaVector / 10.00f;
         Vector2 dragDifference = startDragPosition - endDragPosition;
         Debug.Log($"Start: {startDragPosition} - End: {endDragPosition} is: {dragDifference}");
@@ -87,6 +107,17 @@ public class BallController : MonoBehaviour
             Mathf.Min(original.y, maxHorizontalLaunchForce);
         return new Vector3(x, y, y);
     }
+    public void TogglePauseControls()
+    {
 
-
+        playerInput.SwitchCurrentActionMap(playerInput.currentActionMap.name == "Player" ? "UI" : "Player");
+        Debug.Log("Action Map Changed to: " + playerInput.currentActionMap);
+    }
+    public void onLastLocationInput(InputAction.CallbackContext context)
+    {
+        if (context.performed==true)
+        {
+            saveLastLocation.backToLastLocation();
+        }
+    }
 }

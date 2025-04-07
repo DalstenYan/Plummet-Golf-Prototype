@@ -561,6 +561,7 @@ GameObject:
   - component: {fileID: 5867885912923819746}
   - component: {fileID: 5526939263759018140}
   - component: {fileID: 1230074831747348116}
+  - component: {fileID: -1156795558948715770}
   m_Layer: 0
   m_Name: GolfBallWorking
   m_TagString: Player
@@ -816,13 +817,13 @@ MonoBehaviour:
     m_ActionName: UI/TrackedDeviceOrientation
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
-        m_Mode: 1
+      - m_Target: {fileID: 1230074831747348116}
+        m_TargetAssemblyTypeName: BallController, Assembly-CSharp
+        m_MethodName: OnPauseInput
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -830,6 +831,38 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 3dad2b00-2443-4d01-a1f3-6c64bea79a0d
     m_ActionName: 'Player/Pause[/Keyboard/escape]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1230074831747348116}
+        m_TargetAssemblyTypeName: BallController, Assembly-CSharp
+        m_MethodName: OnPauseInput
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: ce8ad010-8af2-43be-b554-fbb9b6b42b9d
+    m_ActionName: 'UI/Pause[/Keyboard/escape]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1230074831747348116}
+        m_TargetAssemblyTypeName: BallController, Assembly-CSharp
+        m_MethodName: onLastLocationInput
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: c67ec4e0-3ee7-4eda-8661-0747d702681e
+    m_ActionName: 'Player/LastLocation[/Keyboard/space]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: Keyboard&Mouse
   m_DefaultActionMap: Player
@@ -850,6 +883,18 @@ MonoBehaviour:
   maxHorizontalLaunchForce: 8
   maxVerticalLaunchForce: 8
   lookController: {fileID: 5227212306376051758}
+--- !u!114 &-1156795558948715770
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5327946756606020212}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25d92406dd0c6104b83d4ab07d585c26, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6393349167812681684
 GameObject:
   m_ObjectHideFlags: 0
