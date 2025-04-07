@@ -1,3 +1,4 @@
+using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Interactions;
@@ -8,11 +9,15 @@ public class BallController : MonoBehaviour
     Rigidbody rb;
     [SerializeField]
     private float maxHorizontalLaunchForce, maxVerticalLaunchForce;
+    [SerializeField]
+    CinemachineInputAxisController lookController;
 
     private Vector2 deltaVector, startDragPosition, endDragPosition;
 
     void Start()
     {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
         rb = GetComponent<Rigidbody>();
     }
 
@@ -42,17 +47,15 @@ public class BallController : MonoBehaviour
         deltaVector += context.ReadValue<Vector2>();
     }
 
-    private void FixedUpdate()
-    {
-        //Debug.Log(dragDirection);
-    }
-
     /// <summary>
     /// Shows the UI of the power and angle of where the ball will be headed
     /// </summary>
     private void ShowLaunchingUI() 
     {
         //TODO
+        lookController.enabled = false;
+        Cursor.lockState = CursorLockMode.Confined;
+        Cursor.visible = true;
         deltaVector = Vector2.zero;
         startDragPosition = deltaVector;
     }
@@ -63,12 +66,26 @@ public class BallController : MonoBehaviour
         endDragPosition = deltaVector / 10.00f;
         Vector2 dragDifference = startDragPosition - endDragPosition;
         Debug.Log($"Start: {startDragPosition} - End: {endDragPosition} is: {dragDifference}");
-        Vector3 force = 
-            new(Mathf.Min(dragDifference.x, maxHorizontalLaunchForce), 
-            Mathf.Min(dragDifference.y, maxVerticalLaunchForce),
-            Mathf.Min(dragDifference.y, maxVerticalLaunchForce));
-        Debug.Log(force);
+
+        //Multiply by camera rotation
+        Vector3 force = Camera.main.transform.rotation * ConstrainForce(dragDifference);
+        Debug.Log("Final Force: " + force);
         rb.AddForce(force, ForceMode.VelocityChange);
+
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+        lookController.enabled = true;
+    }
+
+    private Vector3 ConstrainForce(Vector2 original) 
+    {
+        float x = original.x < 0 ? 
+            Mathf.Max(original.x, -maxVerticalLaunchForce) : 
+            Mathf.Min(original.x, maxVerticalLaunchForce);
+        float y = original.y < 0 ?
+            Mathf.Max(original.y, -maxHorizontalLaunchForce) :
+            Mathf.Min(original.y, maxHorizontalLaunchForce);
+        return new Vector3(x, y, y);
     }
 
 
