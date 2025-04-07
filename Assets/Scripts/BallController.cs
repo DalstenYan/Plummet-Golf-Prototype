@@ -11,14 +11,28 @@ public class BallController : MonoBehaviour
     private float maxHorizontalLaunchForce, maxVerticalLaunchForce;
     [SerializeField]
     CinemachineInputAxisController lookController;
+    private double pauseInputTime;
+    private PlayerInput playerInput;
 
-    private Vector2 deltaVector, startDragPosition, endDragPosition;
+    private SaveLastLocation saveLastLocation;
+
+
+    [SerializeField]
+    private float horizontalDragSensitivity, verticalDragSensitivity;
+
+    private Vector2 deltaVector;
 
     void Start()
     {
+        lookController.enabled = false;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+        horizontalDragSensitivity /= 10f;
+        verticalDragSensitivity /= 10f;
         rb = GetComponent<Rigidbody>();
+        playerInput = GetComponent<PlayerInput>();
+        saveLastLocation = GetComponent<SaveLastLocation>();
+
     }
 
     /// <summary>
@@ -27,24 +41,52 @@ public class BallController : MonoBehaviour
     /// <param name="context"></param>
     public void OnTapOrDragInput(InputAction.CallbackContext context) 
     {
+        if (context.started) 
+        {
+            ShowLaunchingUI();
+        }
+
         if (context.interaction is SlowTapInteraction) 
         {
-            if (context.started)
-            {
-                ShowLaunchingUI();
-            }
-            else if (context.canceled || context.performed) 
+            if (!context.started) 
             {
                 LaunchBall();
             }
         }
-        //Debug.Log(context.phase + " | " + context.interaction);
-        
+    }
+
+    public void OnRightClickHold(InputAction.CallbackContext context) 
+    {
+        //Debug.Log("Interaction: " + context.interaction + "\nPhase: " + context.phase );
+        if (context.interaction is HoldInteraction)
+        {
+            bool isPanning = !context.canceled;
+            Cursor.visible = !isPanning;
+            lookController.enabled = isPanning;
+            Cursor.lockState = isPanning ? CursorLockMode.Locked : CursorLockMode.Confined;
+        }
+        else 
+        {
+            Cursor.lockState = CursorLockMode.Confined;
+        }
+    }
+
+    public void OnPauseInput(InputAction.CallbackContext context)
+    {
+
+        if (context.performed && (context.startTime != pauseInputTime))
+        {
+            pauseInputTime = context.startTime;
+            //TogglePauseControls();
+            PauseMenu.pauseMenu.OnPause();
+        }
     }
 
     public void OnMouseDelta(InputAction.CallbackContext context) 
     {
-        deltaVector += context.ReadValue<Vector2>();
+        var delta = context.ReadValue<Vector2>();
+        deltaVector.x *= horizontalDragSensitivity;
+        deltaVector -= delta;
     }
 
     /// <summary>
@@ -52,29 +94,27 @@ public class BallController : MonoBehaviour
     /// </summary>
     private void ShowLaunchingUI() 
     {
-        //TODO
-        lookController.enabled = false;
         Cursor.lockState = CursorLockMode.Confined;
         Cursor.visible = true;
-        deltaVector = Vector2.zero;
-        startDragPosition = deltaVector;
     }
 
     private void LaunchBall() 
     {
         //TODO
-        endDragPosition = deltaVector / 10.00f;
-        Vector2 dragDifference = startDragPosition - endDragPosition;
-        Debug.Log($"Start: {startDragPosition} - End: {endDragPosition} is: {dragDifference}");
+        saveLastLocation.newLastLocation();
 
         //Multiply by camera rotation
-        Vector3 force = Camera.main.transform.rotation * ConstrainForce(dragDifference);
-        Debug.Log("Final Force: " + force);
+        deltaVector /= 100.00f;
+        deltaVector.y *= verticalDragSensitivity;
+        var camRot = Camera.main.transform.rotation;
+        camRot.z = 0;
+        Vector3 force = camRot * ConstrainForce(deltaVector);
+        Debug.Log($" Delta Input: {deltaVector} \tFinal Force: {force}\nCamera Rotation: {camRot} ");
         rb.AddForce(force, ForceMode.VelocityChange);
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-        lookController.enabled = true;
+        deltaVector = Vector2.zero;
     }
 
     private Vector3 ConstrainForce(Vector2 original) 
@@ -87,6 +127,22 @@ public class BallController : MonoBehaviour
             Mathf.Min(original.y, maxHorizontalLaunchForce);
         return new Vector3(x, y, y);
     }
+    public void TogglePauseControls()
+    {
 
-
+        playerInput.SwitchCurrentActionMap(playerInput.currentActionMap.name == "Player" ? "UI" : "Player");
+        Debug.Log("Action Map Changed to: " + playerInput.currentActionMap);
+    }
+    public void onLastLocationInput(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            saveLastLocation.backToLastLocation();
+        }
+    }
+    public void ResetForce()
+    {
+        rb.angularVelocity = Vector3.zero;
+        rb.linearVelocity = Vector3.zero;
+    }
 }
