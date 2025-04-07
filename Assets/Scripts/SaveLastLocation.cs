@@ -4,6 +4,12 @@ public class SaveLastLocation : MonoBehaviour
 {
     private Vector3 lastLocation;
     private bool returned = true;
+    private BallController ballController;
+
+    private void Start()
+    {
+        ballController = GetComponent<BallController>();
+    }
 
     public void newLastLocation()
     {
@@ -15,6 +21,7 @@ public class SaveLastLocation : MonoBehaviour
         if (returned == false)
         {
             this.transform.position = lastLocation;
+            ballController.ResetForce();
             returned = true;
         }
     }
