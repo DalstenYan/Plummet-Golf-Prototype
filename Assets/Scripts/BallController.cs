@@ -11,6 +11,9 @@ public class BallController : MonoBehaviour
     private float maxHorizontalLaunchForce, maxVerticalLaunchForce;
     [SerializeField]
     CinemachineInputAxisController lookController;
+    private double pauseInputTime;
+    private PlayerInput playerInput;
+
 
     private Vector2 deltaVector, startDragPosition, endDragPosition;
 
@@ -19,6 +22,8 @@ public class BallController : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         rb = GetComponent<Rigidbody>();
+        playerInput = GetComponent<PlayerInput>();
+
     }
 
     /// <summary>
@@ -40,6 +45,17 @@ public class BallController : MonoBehaviour
         }
         //Debug.Log(context.phase + " | " + context.interaction);
         
+    }
+
+    public void OnPauseInput(InputAction.CallbackContext context)
+    {
+
+        if (context.performed && (context.startTime != pauseInputTime))
+        {
+            pauseInputTime = context.startTime;
+            //TogglePauseControls();
+            PauseMenu.pauseMenu.OnPause();
+        }
     }
 
     public void OnMouseDelta(InputAction.CallbackContext context) 
@@ -87,6 +103,10 @@ public class BallController : MonoBehaviour
             Mathf.Min(original.y, maxHorizontalLaunchForce);
         return new Vector3(x, y, y);
     }
+    public void TogglePauseControls()
+    {
 
-
+        playerInput.SwitchCurrentActionMap(playerInput.currentActionMap.name == "Player" ? "UI" : "Player");
+        Debug.Log("Action Map Changed to: " + playerInput.currentActionMap);
+    }
 }
