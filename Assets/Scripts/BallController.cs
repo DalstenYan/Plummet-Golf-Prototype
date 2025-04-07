@@ -120,4 +120,9 @@ public class BallController : MonoBehaviour
             saveLastLocation.backToLastLocation();
         }
     }
+    public void ResetForce()
+    {
+        rb.angularVelocity = Vector3.zero;
+        rb.linearVelocity = Vector3.zero;
+    }
 }
