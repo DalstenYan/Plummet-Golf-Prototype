@@ -24,7 +24,7 @@ public class PauseMenu : MonoBehaviour
     /// </summary>
     public void OnPause()
     {
-      //  GameObject.FindWithTag("Player").GetComponent<PlayerMover>().TogglePauseControls();
+       GameObject.FindWithTag("Player").GetComponent<BallController>().TogglePauseControls();
         PauseActivate();
     }
 
