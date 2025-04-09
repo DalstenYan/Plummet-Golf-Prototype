@@ -109,9 +109,6 @@ public class BallController : MonoBehaviour
         saveLastLocation.newLastLocation();
         strokes += 1;
         stroketext.text = "Strokes: " + strokes;
-        endDragPosition = deltaVector / 10.00f;
-        Vector2 dragDifference = startDragPosition - endDragPosition;
-        Debug.Log($"Start: {startDragPosition} - End: {endDragPosition} is: {dragDifference}");
         deltaVector /= 100f;
 
         //Multiply by camera rotation
