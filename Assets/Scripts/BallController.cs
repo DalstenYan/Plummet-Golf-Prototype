@@ -1,3 +1,4 @@
+using TMPro;
 using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -13,6 +14,9 @@ public class BallController : MonoBehaviour
     CinemachineInputAxisController lookController;
     private double pauseInputTime;
     private PlayerInput playerInput;
+
+    private int strokes=0;
+    [SerializeField] private TMP_Text stroketext;
 
     private SaveLastLocation saveLastLocation;
 
@@ -83,6 +87,8 @@ public class BallController : MonoBehaviour
     {
         //TODO
         saveLastLocation.newLastLocation();
+        strokes += 1;
+        stroketext.text = "Strokes: " + strokes;
         endDragPosition = deltaVector / 10.00f;
         Vector2 dragDifference = startDragPosition - endDragPosition;
         Debug.Log($"Start: {startDragPosition} - End: {endDragPosition} is: {dragDifference}");
