@@ -23,8 +23,6 @@ public class BallController : MonoBehaviour
     [SerializeField]
     private float horizontalDragSensitivity, verticalDragSensitivity;
 
-    private Vector2 deltaVector, startDragPosition, endDragPosition;
-
     private Vector2 deltaVector;
 
     void Start()
