@@ -112,6 +112,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "RightPress",
+                    "type": "Button",
+                    "id": "cd23809f-0228-4aae-8664-6d872bb8b04d",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "Hold",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -530,6 +539,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "LastLocation",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "3941d0e6-0410-4063-ae88-cba7c035845d",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "RightPress",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
