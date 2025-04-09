@@ -10,7 +10,6 @@ public class FlagRaise : MonoBehaviour
     [SerializeField] private float flagXPosition;
     [SerializeField] private float flagZPosition;
     [SerializeField] private float flagMoveSpeed = 2f;
-    [SerializeField] private float flagRadius = 15f;
 
     void Start()
     {
@@ -42,6 +41,6 @@ public class FlagRaise : MonoBehaviour
 
     private bool NearGoal()
     {
-        return Physics.CheckSphere(flagPole.transform.position, flagRadius, _layerMask);
+        return Physics.CheckSphere(flagPole.transform.position, 7.5f, _layerMask);
     }
 }
