@@ -20,6 +20,10 @@ public class BallController : MonoBehaviour
 
     private SaveLastLocation saveLastLocation;
 
+    //added by connor
+    public AudioClip hit;
+    public AudioClip roll;
+    //end of section
 
     private Vector2 deltaVector, startDragPosition, endDragPosition;
 
@@ -48,6 +52,10 @@ public class BallController : MonoBehaviour
             else if (context.canceled || context.performed) 
             {
                 LaunchBall();
+
+                //added by connor
+                AudioSource.PlayClipAtPoint(hit, transform.position);
+                //end of section
             }
         }
         //Debug.Log(context.phase + " | " + context.interaction);

@@ -1275,6 +1275,9 @@ MonoBehaviour:
   maxHorizontalLaunchForce: 8
   maxVerticalLaunchForce: 8
   lookController: {fileID: 5227212306376051758}
+  stroketext: {fileID: 0}
+  hit: {fileID: 8300000, guid: 1efc352206d8b5f41aeb080a6b069ff0, type: 3}
+  roll: {fileID: 8300000, guid: ab6db54ed1631f245869eded3ceb4d7f, type: 3}
 --- !u!114 &-1156795558948715770
 MonoBehaviour:
   m_ObjectHideFlags: 0
