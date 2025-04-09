@@ -44,10 +44,6 @@ public class BallController : MonoBehaviour
     /// <param name="context"></param>
     public void OnTapOrDragInput(InputAction.CallbackContext context) 
     {
-        if (context.started)
-        {
-            ShowLaunchingUI();
-        }
 
         if (context.interaction is SlowTapInteraction) 
         {
@@ -116,9 +112,6 @@ public class BallController : MonoBehaviour
         Vector3 force = camRot * ConstrainForce(deltaVector);
         Debug.Log($" Delta Input: {deltaVector} \tFinal Force: {force}\nCamera Rotation: {camRot} ");
         rb.AddForce(force, ForceMode.VelocityChange);
-
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
         deltaVector = Vector2.zero;
     }
 
