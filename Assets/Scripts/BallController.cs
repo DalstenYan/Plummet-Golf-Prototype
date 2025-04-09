@@ -1,3 +1,4 @@
+using TMPro;
 using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -14,8 +15,15 @@ public class BallController : MonoBehaviour
     private double pauseInputTime;
     private PlayerInput playerInput;
 
+    private int strokes=0;
+    [SerializeField] private TMP_Text stroketext;
+
     private SaveLastLocation saveLastLocation;
 
+    //added by connor
+    public AudioClip hit;
+    public AudioClip roll;
+    //end of section
 
     private Vector2 deltaVector, startDragPosition, endDragPosition;
 
@@ -44,6 +52,10 @@ public class BallController : MonoBehaviour
             else if (context.canceled || context.performed) 
             {
                 LaunchBall();
+
+                //added by connor
+                AudioSource.PlayClipAtPoint(hit, transform.position);
+                //end of section
             }
         }
         //Debug.Log(context.phase + " | " + context.interaction);
@@ -83,6 +95,8 @@ public class BallController : MonoBehaviour
     {
         //TODO
         saveLastLocation.newLastLocation();
+        strokes += 1;
+        stroketext.text = "Strokes: " + strokes;
         endDragPosition = deltaVector / 10.00f;
         Vector2 dragDifference = startDragPosition - endDragPosition;
         Debug.Log($"Start: {startDragPosition} - End: {endDragPosition} is: {dragDifference}");
