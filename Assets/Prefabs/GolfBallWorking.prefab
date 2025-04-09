@@ -1243,7 +1243,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1230074831747348116}
         m_TargetAssemblyTypeName: BallController, Assembly-CSharp
-        m_MethodName: onLastLocationInput
+        m_MethodName: OnLastLocationInput
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1291,6 +1291,7 @@ MonoBehaviour:
   maxHorizontalLaunchForce: 8
   maxVerticalLaunchForce: 8
   lookController: {fileID: 5227212306376051758}
+  stroketext: {fileID: 0}
   horizontalDragSensitivity: 9.8
   verticalDragSensitivity: 15
 --- !u!114 &-1156795558948715770
