@@ -23,6 +23,8 @@ public class BallController : MonoBehaviour
     [SerializeField]
     private float horizontalDragSensitivity, verticalDragSensitivity;
 
+    private Vector2 deltaVector, startDragPosition, endDragPosition;
+
     private Vector2 deltaVector;
 
     void Start()
@@ -56,10 +58,9 @@ public class BallController : MonoBehaviour
                 LaunchBall();
             }
         }
-        //Debug.Log(context.phase + " | " + context.interaction);
-        
     }
-    public void OnRightClickHold(InputAction.CallbackContext context)
+
+    public void OnRightClickHold(InputAction.CallbackContext context) 
     {
         //Debug.Log("Interaction: " + context.interaction + "\nPhase: " + context.phase );
         if (context.interaction is HoldInteraction)
@@ -69,7 +70,7 @@ public class BallController : MonoBehaviour
             lookController.enabled = isPanning;
             Cursor.lockState = isPanning ? CursorLockMode.Locked : CursorLockMode.Confined;
         }
-        else
+        else 
         {
             Cursor.lockState = CursorLockMode.Confined;
         }
@@ -98,7 +99,6 @@ public class BallController : MonoBehaviour
     /// </summary>
     private void ShowLaunchingUI() 
     {
-        //TODO
         Cursor.lockState = CursorLockMode.Confined;
         Cursor.visible = true;
     }

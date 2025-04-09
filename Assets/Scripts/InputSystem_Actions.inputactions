@@ -33,6 +33,15 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "RightPress",
+                    "type": "Button",
+                    "id": "aed981ec-9396-4dd3-ac35-9e5c7275305c",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "Hold",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "Interact",
                     "type": "Button",
                     "id": "852140f2-7766-474d-8707-702459ba45f3",
@@ -63,7 +72,7 @@
                     "name": "Previous",
                     "type": "Button",
                     "id": "2776c80d-3c14-4091-8c56-d04ced07a2b0",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
@@ -544,7 +553,7 @@
                 },
                 {
                     "name": "",
-                    "id": "3941d0e6-0410-4063-ae88-cba7c035845d",
+                    "id": "6681e281-ba65-4284-8e18-40e8e047100e",
                     "path": "<Mouse>/rightButton",
                     "interactions": "",
                     "processors": "",
