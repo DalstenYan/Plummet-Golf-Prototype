@@ -15,7 +15,7 @@ public class BallController : MonoBehaviour
     private double pauseInputTime;
     private PlayerInput playerInput;
 
-    private int strokes=0;
+    public int strokes=0;
     [SerializeField] private TMP_Text stroketext;
 
     private SaveLastLocation saveLastLocation;
