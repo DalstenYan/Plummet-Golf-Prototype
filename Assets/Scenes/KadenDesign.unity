@@ -827,6 +827,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -8529812226945903967, guid: 771a23f2cd09bfb47a48a43d48e36273, type: 3}
+      propertyPath: isPause
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4684654162904507641, guid: 771a23f2cd09bfb47a48a43d48e36273, type: 3}
       propertyPath: m_Name
       value: PauseMenu
@@ -2920,7 +2924,7 @@ Transform:
   m_GameObject: {fileID: 1324157401}
   serializedVersion: 2
   m_LocalRotation: {x: 0.30292606, y: -0.63893336, z: 0.30292606, w: 0.63893336}
-  m_LocalPosition: {x: 8.71, y: 19.04, z: -16.67}
+  m_LocalPosition: {x: 8.72, y: 19.06, z: -16.67}
   m_LocalScale: {x: 10, y: 10, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
