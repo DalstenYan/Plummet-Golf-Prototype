@@ -3109,6 +3109,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4579827390231761759, guid: 4ea293fb32c83574eb8770d378b3b01e, type: 3}
+      propertyPath: field of view
+      value: 60.000004
+      objectReference: {fileID: 0}
+    - target: {fileID: 7892425319439154927, guid: 4ea293fb32c83574eb8770d378b3b01e, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7892425319439154927, guid: 4ea293fb32c83574eb8770d378b3b01e, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7892425319439154927, guid: 4ea293fb32c83574eb8770d378b3b01e, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -5
+      objectReference: {fileID: 0}
     - target: {fileID: 9059205801016213574, guid: 4ea293fb32c83574eb8770d378b3b01e, type: 3}
       propertyPath: m_Name
       value: FollowBallCam
@@ -3234,6 +3250,10 @@ PrefabInstance:
     - target: {fileID: 1610108275874990401, guid: 2dd40a81567ec2045a922ac576065c0f, type: 3}
       propertyPath: Target.TrackingTarget
       value: 
+      objectReference: {fileID: 1242275882}
+    - target: {fileID: 1610108275874990401, guid: 2dd40a81567ec2045a922ac576065c0f, type: 3}
+      propertyPath: Target.CustomLookAtTarget
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2969956246242194076, guid: 2dd40a81567ec2045a922ac576065c0f, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3958,6 +3978,11 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 5634898225650168712, guid: cc9af16a02d987f44b353eaf907bc882, type: 3}
   m_PrefabInstance: {fileID: 1237806683}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1242275882 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1718012494310953451, guid: 4ea293fb32c83574eb8770d378b3b01e, type: 3}
+  m_PrefabInstance: {fileID: 1019576874}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1254210132
 GameObject:
@@ -6400,6 +6425,10 @@ PrefabInstance:
     - target: {fileID: 1003455051989110160, guid: ae226848e2261804c824f43f4151b150, type: 3}
       propertyPath: m_Name
       value: IntroCam Container
+      objectReference: {fileID: 0}
+    - target: {fileID: 1003455051989110160, guid: ae226848e2261804c824f43f4151b150, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1276461572345310309, guid: ae226848e2261804c824f43f4151b150, type: 3}
       propertyPath: m_LocalPosition.x
