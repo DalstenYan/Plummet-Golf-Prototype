@@ -39,8 +39,9 @@ public class BallController : MonoBehaviour
 
         horizontalDragSensitivity /= 10f;
         verticalDragSensitivity /= 10f;
-        
 
+        Cursor.lockState = CursorLockMode.Confined;
+        Cursor.visible = true;
     }
 
     /// <summary>
@@ -49,19 +50,26 @@ public class BallController : MonoBehaviour
     /// <param name="context"></param>
     public void OnTapOrDragInput(InputAction.CallbackContext context) 
     {
-
+        //Debug.Log(context.interaction + ": " + context.phase);
+        if (context.started && context.interaction is TapInteraction)
+        {
+            //Debug.Log("Force Reset");
+            ResetForce();
+        }
         if (context.interaction is SlowTapInteraction) 
         {
-            if (!context.started) 
+            
+            if(!context.started) 
             {
                 LaunchBall();
+                
             }
         }
     }
 
     public void OnRightClickHold(InputAction.CallbackContext context) 
     {
-        //Debug.Log("Interaction: " + context.interaction + "\nPhase: " + context.phase );
+        
         if (context.interaction is HoldInteraction)
         {
             bool isPanning = !context.canceled;
@@ -93,15 +101,6 @@ public class BallController : MonoBehaviour
         deltaVector -= delta;
     }
 
-    /// <summary>
-    /// Shows the UI of the power and angle of where the ball will be headed
-    /// </summary>
-    private void ShowLaunchingUI() 
-    {
-        Cursor.lockState = CursorLockMode.Confined;
-        Cursor.visible = true;
-    }
-
     private void LaunchBall() 
     {
         //TODO
@@ -116,8 +115,11 @@ public class BallController : MonoBehaviour
         camRot.z = 0;
         Vector3 force = camRot * ConstrainForce(deltaVector);
         Debug.Log($" Delta Input: {deltaVector} \tFinal Force: {force}\nCamera Rotation: {camRot} ");
-        rb.AddForce(force, ForceMode.VelocityChange);
+        rb.AddForce(force, ForceMode.Impulse);
         deltaVector = Vector2.zero;
+
+        Cursor.lockState = CursorLockMode.Confined;
+        Cursor.visible = true;
     }
     private void UpdateUI() 
     {
@@ -127,19 +129,19 @@ public class BallController : MonoBehaviour
 
     private Vector3 ConstrainForce(Vector2 original) 
     {
-        float x = original.x < 0 ? 
-            Mathf.Max(original.x, -maxVerticalLaunchForce) : 
-            Mathf.Min(original.x, maxVerticalLaunchForce);
+        float x = original.x < 0 ?
+            Mathf.Max(original.x, -maxHorizontalLaunchForce) :
+            Mathf.Min(original.x, maxHorizontalLaunchForce);
         float y = original.y < 0 ?
-            Mathf.Max(original.y, -maxHorizontalLaunchForce) :
-            Mathf.Min(original.y, maxHorizontalLaunchForce);
+            Mathf.Max(original.y, -maxVerticalLaunchForce) :
+            Mathf.Min(original.y, maxVerticalLaunchForce);
         return new Vector3(x, y, y);
     }
     public void TogglePauseControls()
     {
 
         playerInput.SwitchCurrentActionMap(playerInput.currentActionMap.name == "Player" ? "UI" : "Player");
-        Debug.Log("Action Map Changed to: " + playerInput.currentActionMap);
+        //Debug.Log("Action Map Changed to: " + playerInput.currentActionMap);
     }
     public void OnLastLocationInput(InputAction.CallbackContext context)
     {
@@ -150,6 +152,9 @@ public class BallController : MonoBehaviour
     }
     public void ResetForce()
     {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+        deltaVector = Vector2.zero;
         rb.angularVelocity = Vector3.zero;
         rb.linearVelocity = Vector3.zero;
     }
