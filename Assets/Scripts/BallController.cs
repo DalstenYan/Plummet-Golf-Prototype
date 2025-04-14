@@ -102,7 +102,7 @@ public class BallController : MonoBehaviour
         //TODO
         saveLastLocation.newLastLocation();
         strokes += 1;
-        stroketext.text = "Strokes: " + strokes;
+        UpdateUI();
         deltaVector /= 100f;
 
         //Multiply by camera rotation
@@ -113,6 +113,11 @@ public class BallController : MonoBehaviour
         Debug.Log($" Delta Input: {deltaVector} \tFinal Force: {force}\nCamera Rotation: {camRot} ");
         rb.AddForce(force, ForceMode.VelocityChange);
         deltaVector = Vector2.zero;
+    }
+    private void UpdateUI() 
+    {
+        stroketext.text = "Strokes: " + strokes;
+        
     }
 
     private Vector3 ConstrainForce(Vector2 original) 
