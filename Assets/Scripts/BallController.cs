@@ -56,7 +56,7 @@ public class BallController : MonoBehaviour
 
     public void OnRightClickHold(InputAction.CallbackContext context) 
     {
-        //Debug.Log("Interaction: " + context.interaction + "\nPhase: " + context.phase );
+        Debug.Log("Interaction: " + context.interaction + "\nPhase: " + context.phase );
         if (context.interaction is HoldInteraction)
         {
             bool isPanning = !context.canceled;
