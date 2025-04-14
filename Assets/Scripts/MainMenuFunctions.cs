@@ -22,6 +22,12 @@ public class MainMenuFunctions : MonoBehaviour
         Debug.Log("Holy moly you're playing the game 3 frfr ong");
     }
 
+    public void LoadGameLevel4()
+    {
+        SceneManager.LoadScene("Level 4");
+        Debug.Log("Holy moly you're playing the game 4 frfr ong");
+    }
+
     public void LoadGameTest()
     {
         SceneManager.LoadScene("TestingGround");
@@ -41,5 +47,15 @@ public class MainMenuFunctions : MonoBehaviour
     {
         Debug.Log("Quit The Game");
         Application.Quit();
+    }
+
+    public void LoadMM()
+    {
+        SceneManager.LoadScene("TitleScreen");
+    }
+
+    public void ReplayLevel()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().ToString());
     }
 }
