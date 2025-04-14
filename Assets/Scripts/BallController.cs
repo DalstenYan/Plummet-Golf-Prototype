@@ -10,8 +10,8 @@ public class BallController : MonoBehaviour
     Rigidbody rb;
     [SerializeField]
     private float maxHorizontalLaunchForce, maxVerticalLaunchForce;
-    [SerializeField]
     CinemachineInputAxisController lookController;
+    CinemachineCamera cinemachineCamera;
     private double pauseInputTime;
     private PlayerInput playerInput;
 
@@ -27,14 +27,19 @@ public class BallController : MonoBehaviour
 
     void Start()
     {
-        lookController.enabled = false;
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
-        horizontalDragSensitivity /= 10f;
-        verticalDragSensitivity /= 10f;
+        cinemachineCamera = GetComponentInChildren<CinemachineCamera>();
+        cinemachineCamera.Follow = GameObject.FindWithTag("BallFollower").transform;
+        lookController = GetComponentInChildren<CinemachineInputAxisController>();
         rb = GetComponent<Rigidbody>();
         playerInput = GetComponent<PlayerInput>();
         saveLastLocation = GetComponent<SaveLastLocation>();
+
+
+        lookController.enabled = false;
+
+        horizontalDragSensitivity /= 10f;
+        verticalDragSensitivity /= 10f;
+        
 
     }
 
