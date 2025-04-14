@@ -26,6 +26,8 @@ public class BallinHole : MonoBehaviour
         if(stopwatchCounter.ElapsedMilliseconds > 2500)
         {
             WinScreen.SetActive(true);
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
         }
     }
 
