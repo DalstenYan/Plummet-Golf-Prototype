@@ -48,4 +48,15 @@ public class MainMenuFunctions : MonoBehaviour
         Debug.Log("Quit The Game");
         Application.Quit();
     }
+
+    public void LoadMM()
+    {
+        SceneManager.LoadScene("TitleScreen");
+    }
+
+    public void ReplayLevel()
+    {
+        string currentSceneName = SceneManager.GetActiveScene().name;
+        SceneManager.LoadScene(currentSceneName);
+    }
 }
