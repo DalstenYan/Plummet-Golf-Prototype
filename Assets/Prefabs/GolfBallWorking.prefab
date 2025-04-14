@@ -1288,12 +1288,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a01698bcd4f07f4caef15ff780d7826, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHorizontalLaunchForce: 8
-  maxVerticalLaunchForce: 8
-  lookController: {fileID: 5227212306376051758}
+  maxHorizontalLaunchForce: 5
+  maxVerticalLaunchForce: 6
   stroketext: {fileID: 0}
   horizontalDragSensitivity: 9.8
-  verticalDragSensitivity: 15
+  verticalDragSensitivity: 10
 --- !u!114 &-1156795558948715770
 MonoBehaviour:
   m_ObjectHideFlags: 0
