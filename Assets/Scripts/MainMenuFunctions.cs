@@ -22,6 +22,12 @@ public class MainMenuFunctions : MonoBehaviour
         Debug.Log("Holy moly you're playing the game 3 frfr ong");
     }
 
+    public void LoadGameLevel4()
+    {
+        SceneManager.LoadScene("Level 4");
+        Debug.Log("Holy moly you're playing the game 4 frfr ong");
+    }
+
     public void LoadGameTest()
     {
         SceneManager.LoadScene("TestingGround");
