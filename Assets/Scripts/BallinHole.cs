@@ -10,7 +10,7 @@ public class BallinHole : MonoBehaviour
     private Stopwatch stopwatchCounter = new Stopwatch();
     [SerializeField] private BallController ballController;
     [SerializeField] private TMP_Text strokeText;
-    [SerializeField] private GameObject ball;
+    [SerializeField] private AudioClip ballInHoleSound;
 
 
 
@@ -30,10 +30,10 @@ public class BallinHole : MonoBehaviour
         if(stopwatchCounter.ElapsedMilliseconds > 2500)
         {
             strokeText.text = "    You finished the level in \r\n\t     " + ballController.strokes + " strokes!";
+            AudioSource.PlayClipAtPoint(ballInHoleSound, transform.position);
             WinScreen.SetActive(true);
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
-            ball.SetActive(false);
         }
     }
 
