@@ -9,7 +9,7 @@ public class BallController : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     Rigidbody rb;
     [SerializeField]
-    private float maxLeftRightLaunchForce, maxForwardBackwardLaunchForce;
+    private float maxHorizontalLaunchForce, maxVerticalLaunchForce;
     CinemachineInputAxisController lookController;
     CinemachineCamera cinemachineCamera;
     private double pauseInputTime;
@@ -21,12 +21,15 @@ public class BallController : MonoBehaviour
     private SaveLastLocation saveLastLocation;
 
     [SerializeField]
-    private float leftRightDragSensitivity, forwardBackwardDragSensitivity;
+    private float horizontalDragSensitivity, verticalDragSensitivity;
 
     private Vector2 deltaVector;
 
     private LineRenderer lr;
     private bool linerendering;
+
+    [SerializeField] private AudioClip swingSound;
+    [SerializeField] private AudioClip rollSound;
 
     void Start()
     {
@@ -41,22 +44,22 @@ public class BallController : MonoBehaviour
 
         lookController.enabled = false;
 
-        leftRightDragSensitivity /= 10f;
-        forwardBackwardDragSensitivity /= 10f;
+        horizontalDragSensitivity /= 10f;
+        verticalDragSensitivity /= 10f;
 
         Cursor.lockState = CursorLockMode.Confined;
         Cursor.visible = true;
         
     }
-    private void FixedUpdate()
+    private void Update()
     {
-        if(linerendering)
+        if(linerendering==true)
         {
             lr.positionCount = 2;
             lr.SetPosition(0, transform.position);
             Vector3 temp = deltaVector;
             temp /= 100f;
-            temp.y *= forwardBackwardDragSensitivity;
+            temp.y *= verticalDragSensitivity;
             var camRot = Camera.main.transform.rotation;
             camRot.z = 0;
             Vector3 force = camRot * ConstrainForce(temp);
@@ -126,6 +129,7 @@ public class BallController : MonoBehaviour
     public void OnMouseDelta(InputAction.CallbackContext context) 
     {
         var delta = context.ReadValue<Vector2>();
+        deltaVector.x *= horizontalDragSensitivity;
         deltaVector -= delta;
     }
 
@@ -134,19 +138,20 @@ public class BallController : MonoBehaviour
         //TODO
         saveLastLocation.newLastLocation();
         strokes += 1;
+        AudioSource.PlayClipAtPoint(swingSound, transform.position);
+        AudioSource.PlayClipAtPoint(rollSound, transform.position);
         UIManager.Instance.UpdateTallyStrokes();
         //UpdateUI();
         deltaVector /= 100f;
 
         linerendering = false;
         //Multiply by camera rotation
-        deltaVector.y *= forwardBackwardDragSensitivity;
-        deltaVector.x *= leftRightDragSensitivity;
+        deltaVector.y *= verticalDragSensitivity;
         var camRot = Camera.main.transform.rotation;
+        //camRot.y = 0;
         Vector3 force = camRot * ConstrainForce(deltaVector);
-        force.y = 0;
         Debug.Log($" Delta Input: {deltaVector} \tFinal Force: {force}\nCamera Rotation: {camRot} ");
-        
+       
         rb.AddForce(force, ForceMode.Impulse);
         deltaVector = Vector2.zero;
 
@@ -162,11 +167,11 @@ public class BallController : MonoBehaviour
     private Vector3 ConstrainForce(Vector2 original) 
     {
         float x = original.x < 0 ?
-            Mathf.Max(original.x, -maxLeftRightLaunchForce) :
-            Mathf.Min(original.x, maxLeftRightLaunchForce);
+            Mathf.Max(original.x, -maxHorizontalLaunchForce) :
+            Mathf.Min(original.x, maxHorizontalLaunchForce);
         float y = original.y < 0 ?
-            Mathf.Max(original.y, -maxForwardBackwardLaunchForce) :
-            Mathf.Min(original.y, maxForwardBackwardLaunchForce);
+            Mathf.Max(original.y, -maxVerticalLaunchForce) :
+            Mathf.Min(original.y, maxVerticalLaunchForce);
         return new Vector3(x, 0, y);
     }
     public void TogglePauseControls()
