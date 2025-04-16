@@ -7029,6 +7029,14 @@ PrefabInstance:
       propertyPath: stroketext
       value: 
       objectReference: {fileID: 1237076187}
+    - target: {fileID: 1230074831747348116, guid: 2dd40a81567ec2045a922ac576065c0f, type: 3}
+      propertyPath: maxVerticalLaunchForce
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 1230074831747348116, guid: 2dd40a81567ec2045a922ac576065c0f, type: 3}
+      propertyPath: verticalDragSensitivity
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 1610108275874990401, guid: 2dd40a81567ec2045a922ac576065c0f, type: 3}
       propertyPath: Target.TrackingTarget
       value: 
