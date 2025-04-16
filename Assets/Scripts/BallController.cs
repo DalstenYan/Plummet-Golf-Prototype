@@ -60,7 +60,8 @@ public class BallController : MonoBehaviour
             var camRot = Camera.main.transform.rotation;
             camRot.z = 0;
             Vector3 force = camRot * ConstrainForce(temp);
-            Debug.Log(force);
+            
+            force.y=0;
             lr.SetPosition(1, transform.position+force);
 
         }
