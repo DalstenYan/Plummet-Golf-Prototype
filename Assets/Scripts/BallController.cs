@@ -25,6 +25,9 @@ public class BallController : MonoBehaviour
 
     private Vector2 deltaVector;
 
+    private LineRenderer lr;
+    private bool linerendering;
+
     void Start()
     {
         cinemachineCamera = GetComponentInChildren<CinemachineCamera>();
@@ -33,6 +36,7 @@ public class BallController : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         playerInput = GetComponent<PlayerInput>();
         saveLastLocation = GetComponent<SaveLastLocation>();
+        lr = GetComponent<LineRenderer>();
 
 
         lookController.enabled = false;
@@ -42,6 +46,28 @@ public class BallController : MonoBehaviour
 
         Cursor.lockState = CursorLockMode.Confined;
         Cursor.visible = true;
+        
+    }
+    private void Update()
+    {
+        if(linerendering==true)
+        {
+            lr.positionCount = 2;
+            lr.SetPosition(0, transform.position);
+            Vector3 temp = deltaVector;
+            temp /= 100f;
+            temp.y *= verticalDragSensitivity;
+            var camRot = Camera.main.transform.rotation;
+            camRot.z = 0;
+            Vector3 force = camRot * ConstrainForce(temp);
+            Debug.Log(force);
+            lr.SetPosition(1, transform.position+force);
+
+        }
+        else
+        {
+            lr.positionCount = 0;
+        }
     }
 
     /// <summary>
@@ -55,6 +81,7 @@ public class BallController : MonoBehaviour
         {
             //Debug.Log("Force Reset");
             ResetForce();
+            linerendering = true;
         }
         if (context.interaction is SlowTapInteraction) 
         {
@@ -76,6 +103,7 @@ public class BallController : MonoBehaviour
             Cursor.visible = !isPanning;
             lookController.enabled = isPanning;
             Cursor.lockState = isPanning ? CursorLockMode.Locked : CursorLockMode.Confined;
+            
         }
         else 
         {
@@ -109,6 +137,7 @@ public class BallController : MonoBehaviour
         UpdateUI();
         deltaVector /= 100f;
 
+        linerendering = false;
         //Multiply by camera rotation
         deltaVector.y *= verticalDragSensitivity;
         var camRot = Camera.main.transform.rotation;
