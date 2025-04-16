@@ -28,6 +28,9 @@ public class BallController : MonoBehaviour
     private LineRenderer lr;
     private bool linerendering;
 
+    [SerializeField] private AudioClip swingSound;
+    [SerializeField] private AudioClip rollSound;
+
     void Start()
     {
         cinemachineCamera = GetComponentInChildren<CinemachineCamera>();
@@ -136,6 +139,8 @@ public class BallController : MonoBehaviour
         saveLastLocation.newLastLocation();
         strokes += 1;
         UpdateUI();
+        AudioSource.PlayClipAtPoint(swingSound, transform.position);
+        AudioSource.PlayClipAtPoint(rollSound, transform.position);
         deltaVector /= 100f;
 
         linerendering = false;
@@ -145,6 +150,7 @@ public class BallController : MonoBehaviour
         //camRot.y = 0;
         Vector3 force = camRot * ConstrainForce(deltaVector);
         Debug.Log($" Delta Input: {deltaVector} \tFinal Force: {force}\nCamera Rotation: {camRot} ");
+       
         rb.AddForce(force, ForceMode.Impulse);
         deltaVector = Vector2.zero;
 
