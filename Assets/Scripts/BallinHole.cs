@@ -10,6 +10,7 @@ public class BallinHole : MonoBehaviour
     private Stopwatch stopwatchCounter = new Stopwatch();
     [SerializeField] private BallController ballController;
     [SerializeField] private TMP_Text strokeText;
+    [SerializeField] private GameObject ball;
 
 
 
@@ -32,6 +33,7 @@ public class BallinHole : MonoBehaviour
             WinScreen.SetActive(true);
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
+            ball.SetActive(false);
         }
     }
 
