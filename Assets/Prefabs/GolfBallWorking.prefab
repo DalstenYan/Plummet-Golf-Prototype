@@ -1078,7 +1078,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!114 &5526939263759018140
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1294,7 +1294,7 @@ MonoBehaviour:
   strokes: 0
   stroketext: {fileID: 0}
   leftRightDragSensitivity: 9.8
-  forwardBackwardDragSensitivity: 7
+  forwardBackwardDragSensitivity: 5
 --- !u!114 &-1156795558948715770
 MonoBehaviour:
   m_ObjectHideFlags: 0
