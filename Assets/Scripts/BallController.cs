@@ -138,9 +138,10 @@ public class BallController : MonoBehaviour
         //TODO
         saveLastLocation.newLastLocation();
         strokes += 1;
-        UpdateUI();
         AudioSource.PlayClipAtPoint(swingSound, transform.position);
         AudioSource.PlayClipAtPoint(rollSound, transform.position);
+        UIManager.Instance.UpdateTallyStrokes();
+        //UpdateUI();
         deltaVector /= 100f;
 
         linerendering = false;
