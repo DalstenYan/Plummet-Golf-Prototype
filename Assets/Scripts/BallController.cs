@@ -134,7 +134,8 @@ public class BallController : MonoBehaviour
         //TODO
         saveLastLocation.newLastLocation();
         strokes += 1;
-        UpdateUI();
+        UIManager.Instance.UpdateTallyStrokes();
+        //UpdateUI();
         deltaVector /= 100f;
 
         linerendering = false;
