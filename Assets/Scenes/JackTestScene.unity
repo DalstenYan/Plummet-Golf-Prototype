@@ -5331,6 +5331,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8c66c27d7da59954681291a7d33ace4a, type: 3}
+--- !u!114 &354834167 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1230074831747348116, guid: 2dd40a81567ec2045a922ac576065c0f, type: 3}
+  m_PrefabInstance: {fileID: 1725563738}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a01698bcd4f07f4caef15ff780d7826, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &355781717 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3512655713190762566, guid: 8c66c27d7da59954681291a7d33ace4a, type: 3}
@@ -5793,6 +5804,14 @@ PrefabInstance:
     - target: {fileID: 7120303538729810270, guid: e4a759a0d7ea2b94c85369fe0c9e5f2b, type: 3}
       propertyPath: m_Name
       value: WinScreen
+      objectReference: {fileID: 0}
+    - target: {fileID: 7120303538729810270, guid: e4a759a0d7ea2b94c85369fe0c9e5f2b, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8353786352752122280, guid: e4a759a0d7ea2b94c85369fe0c9e5f2b, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 150
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -15771,6 +15790,14 @@ PrefabInstance:
       propertyPath: WinScreen
       value: 
       objectReference: {fileID: 1828919221}
+    - target: {fileID: 8944827356341526388, guid: 7a9cdc70b6b0ca44da9e0d6d3538e752, type: 3}
+      propertyPath: strokeText
+      value: 
+      objectReference: {fileID: 1165665521}
+    - target: {fileID: 8944827356341526388, guid: 7a9cdc70b6b0ca44da9e0d6d3538e752, type: 3}
+      propertyPath: ballController
+      value: 
+      objectReference: {fileID: 354834167}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -16412,6 +16439,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3512655713190762566, guid: 8c66c27d7da59954681291a7d33ace4a, type: 3}
   m_PrefabInstance: {fileID: 853013910}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1165665521 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 925054190780906825, guid: e4a759a0d7ea2b94c85369fe0c9e5f2b, type: 3}
+  m_PrefabInstance: {fileID: 376678477}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1167175640 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3512655713190762566, guid: 8c66c27d7da59954681291a7d33ace4a, type: 3}
@@ -27319,6 +27357,10 @@ PrefabInstance:
     - target: {fileID: 4684654162904507641, guid: 771a23f2cd09bfb47a48a43d48e36273, type: 3}
       propertyPath: m_Name
       value: PauseMenu
+      objectReference: {fileID: 0}
+    - target: {fileID: 4684654162904507641, guid: 771a23f2cd09bfb47a48a43d48e36273, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5485536866545700462, guid: 771a23f2cd09bfb47a48a43d48e36273, type: 3}
       propertyPath: m_Pivot.x
