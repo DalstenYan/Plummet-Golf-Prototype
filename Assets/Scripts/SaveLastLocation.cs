@@ -25,4 +25,13 @@ public class SaveLastLocation : MonoBehaviour
             returned = true;
         }
     }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if(collision.gameObject.tag=="Killbox")
+        {
+            Debug.Log("colliding");
+            backToLastLocation();
+        }   
+    }
 }
