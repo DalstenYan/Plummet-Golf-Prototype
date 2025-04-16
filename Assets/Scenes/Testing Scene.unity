@@ -3227,6 +3227,10 @@ PrefabInstance:
       propertyPath: stroketext
       value: 
       objectReference: {fileID: 1027389481}
+    - target: {fileID: 1230074831747348116, guid: 2dd40a81567ec2045a922ac576065c0f, type: 3}
+      propertyPath: maxVerticalLaunchForce
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 1610108275874990401, guid: 2dd40a81567ec2045a922ac576065c0f, type: 3}
       propertyPath: Target.LookAtTarget
       value: 
