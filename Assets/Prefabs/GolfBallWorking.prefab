@@ -1289,7 +1289,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHorizontalLaunchForce: 5
-  maxVerticalLaunchForce: 6
+  maxVerticalLaunchForce: 12
   stroketext: {fileID: 0}
   horizontalDragSensitivity: 9.8
   verticalDragSensitivity: 10
