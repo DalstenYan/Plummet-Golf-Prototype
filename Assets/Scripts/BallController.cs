@@ -141,7 +141,7 @@ public class BallController : MonoBehaviour
         //Multiply by camera rotation
         deltaVector.y *= verticalDragSensitivity;
         var camRot = Camera.main.transform.rotation;
-        camRot.z = 0;
+        //camRot.y = 0;
         Vector3 force = camRot * ConstrainForce(deltaVector);
         Debug.Log($" Delta Input: {deltaVector} \tFinal Force: {force}\nCamera Rotation: {camRot} ");
         rb.AddForce(force, ForceMode.Impulse);
@@ -164,7 +164,7 @@ public class BallController : MonoBehaviour
         float y = original.y < 0 ?
             Mathf.Max(original.y, -maxVerticalLaunchForce) :
             Mathf.Min(original.y, maxVerticalLaunchForce);
-        return new Vector3(x, y, y);
+        return new Vector3(x, 0, y);
     }
     public void TogglePauseControls()
     {
