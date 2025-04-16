@@ -1294,7 +1294,7 @@ MonoBehaviour:
   strokes: 0
   stroketext: {fileID: 0}
   leftRightDragSensitivity: 9.8
-  forwardBackwardDragSensitivity: 7
+  forwardBackwardDragSensitivity: 5
 --- !u!114 &-1156795558948715770
 MonoBehaviour:
   m_ObjectHideFlags: 0
