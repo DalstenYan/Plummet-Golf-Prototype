@@ -83,7 +83,6 @@ MonoBehaviour:
   flagXPosition: 0
   flagZPosition: 0
   flagMoveSpeed: 2
-  flagRadius: 15
 --- !u!1 &1642327397151109640
 GameObject:
   m_ObjectHideFlags: 0
@@ -190,8 +189,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 0.8156822, z: 1}
-  m_Center: {x: 0, y: 0.092158586, z: 0}
+  m_Size: {x: 1, y: 0.48480728, z: 1}
+  m_Center: {x: 0, y: 0.25759566, z: 0}
 --- !u!1 &5302273652379221796
 GameObject:
   m_ObjectHideFlags: 0
