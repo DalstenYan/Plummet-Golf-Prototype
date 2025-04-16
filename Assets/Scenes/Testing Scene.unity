@@ -3240,6 +3240,22 @@ PrefabInstance:
       propertyPath: maxVerticalLaunchForce
       value: 9
       objectReference: {fileID: 0}
+    - target: {fileID: 1230074831747348116, guid: 2dd40a81567ec2045a922ac576065c0f, type: 3}
+      propertyPath: maxLeftRightLaunchForce
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1230074831747348116, guid: 2dd40a81567ec2045a922ac576065c0f, type: 3}
+      propertyPath: leftRightDragSensitivity
+      value: 9.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1230074831747348116, guid: 2dd40a81567ec2045a922ac576065c0f, type: 3}
+      propertyPath: maxForwardBackwardLaunchForce
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 1230074831747348116, guid: 2dd40a81567ec2045a922ac576065c0f, type: 3}
+      propertyPath: forwardBackwardDragSensitivity
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 1610108275874990401, guid: 2dd40a81567ec2045a922ac576065c0f, type: 3}
       propertyPath: Target.LookAtTarget
       value: 
@@ -5397,6 +5413,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5634898225650168712, guid: cc9af16a02d987f44b353eaf907bc882, type: 3}
   m_PrefabInstance: {fileID: 1643454492}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1645677407 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5327946756606020212, guid: 2dd40a81567ec2045a922ac576065c0f, type: 3}
+  m_PrefabInstance: {fileID: 1125451603}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1683048315
 GameObject:
   m_ObjectHideFlags: 0
@@ -7094,6 +7115,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8493367941139285305, guid: e4a759a0d7ea2b94c85369fe0c9e5f2b, type: 3}
+      propertyPath: m_UiScaleMode
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -7157,7 +7182,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1230074831747348116, guid: 2dd40a81567ec2045a922ac576065c0f, type: 3}
   m_PrefabInstance: {fileID: 1125451603}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1645677407}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1a01698bcd4f07f4caef15ff780d7826, type: 3}
@@ -7771,6 +7796,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8944827356341526388, guid: 7a9cdc70b6b0ca44da9e0d6d3538e752, type: 3}
+      propertyPath: ball
+      value: 
+      objectReference: {fileID: 1645677407}
     - target: {fileID: 8944827356341526388, guid: 7a9cdc70b6b0ca44da9e0d6d3538e752, type: 3}
       propertyPath: WinScreen
       value: 
