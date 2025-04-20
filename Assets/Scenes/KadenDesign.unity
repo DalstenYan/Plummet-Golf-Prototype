@@ -1127,7 +1127,7 @@ PrefabInstance:
     - target: {fileID: 4925000592433623491, guid: 2dd40a81567ec2045a922ac576065c0f, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 487414b43ac55e84cab68a9392a30422, type: 2}
+      objectReference: {fileID: 2100000, guid: 1cf246778d3494644850340ff8de4d4e, type: 2}
     - target: {fileID: 5327946756606020212, guid: 2dd40a81567ec2045a922ac576065c0f, type: 3}
       propertyPath: m_Name
       value: GolfBallWorking
