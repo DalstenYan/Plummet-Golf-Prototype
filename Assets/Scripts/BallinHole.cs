@@ -34,6 +34,9 @@ public class BallinHole : MonoBehaviour
             WinScreen.SetActive(true);
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
+            stopwatchCounter.Stop();
+            stopwatchCounter.Reset();
+            GameObject.FindWithTag("Player").GetComponent<BallController>().TogglePauseControls();
         }
     }
 
