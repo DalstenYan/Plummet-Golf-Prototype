@@ -1289,12 +1289,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a01698bcd4f07f4caef15ff780d7826, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHorizontalLaunchForce: 5
-  maxVerticalLaunchForce: 6
+  maxLeftRightLaunchForce: 5
+  maxForwardBackwardLaunchForce: 20
   strokes: 0
   stroketext: {fileID: 0}
-  horizontalDragSensitivity: 9.8
-  verticalDragSensitivity: 10
+  leftRightDragSensitivity: 9.8
+  forwardBackwardDragSensitivity: 7
   swingSound: {fileID: 8300000, guid: 0f56c4d55229a8f479a2e347b8651cd4, type: 3}
   rollSound: {fileID: 8300000, guid: ab6db54ed1631f245869eded3ceb4d7f, type: 3}
 --- !u!114 &-1156795558948715770

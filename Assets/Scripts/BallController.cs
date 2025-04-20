@@ -9,7 +9,7 @@ public class BallController : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     Rigidbody rb;
     [SerializeField]
-    private float maxHorizontalLaunchForce, maxVerticalLaunchForce;
+    private float maxLeftRightLaunchForce, maxForwardBackwardLaunchForce;
     CinemachineInputAxisController lookController;
     CinemachineCamera cinemachineCamera;
     private double pauseInputTime;
@@ -21,7 +21,7 @@ public class BallController : MonoBehaviour
     private SaveLastLocation saveLastLocation;
 
     [SerializeField]
-    private float horizontalDragSensitivity, verticalDragSensitivity;
+    private float leftRightDragSensitivity, forwardBackwardDragSensitivity;
 
     private Vector2 deltaVector;
 
@@ -44,22 +44,22 @@ public class BallController : MonoBehaviour
 
         lookController.enabled = false;
 
-        horizontalDragSensitivity /= 10f;
-        verticalDragSensitivity /= 10f;
+        leftRightDragSensitivity /= 10f;
+        forwardBackwardDragSensitivity /= 10f;
 
         Cursor.lockState = CursorLockMode.Confined;
         Cursor.visible = true;
         
     }
-    private void Update()
+    private void FixedUpdate()
     {
-        if(linerendering==true)
+        if(linerendering)
         {
             lr.positionCount = 2;
             lr.SetPosition(0, transform.position);
             Vector3 temp = deltaVector;
             temp /= 100f;
-            temp.y *= verticalDragSensitivity;
+            temp.y *= forwardBackwardDragSensitivity;
             var camRot = Camera.main.transform.rotation;
             camRot.z = 0;
             Vector3 force = camRot * ConstrainForce(temp);
@@ -129,7 +129,6 @@ public class BallController : MonoBehaviour
     public void OnMouseDelta(InputAction.CallbackContext context) 
     {
         var delta = context.ReadValue<Vector2>();
-        deltaVector.x *= horizontalDragSensitivity;
         deltaVector -= delta;
     }
 
@@ -146,12 +145,13 @@ public class BallController : MonoBehaviour
 
         linerendering = false;
         //Multiply by camera rotation
-        deltaVector.y *= verticalDragSensitivity;
+        deltaVector.y *= forwardBackwardDragSensitivity;
+        deltaVector.x *= leftRightDragSensitivity;
         var camRot = Camera.main.transform.rotation;
-        //camRot.y = 0;
         Vector3 force = camRot * ConstrainForce(deltaVector);
+        force.y = 0;
         Debug.Log($" Delta Input: {deltaVector} \tFinal Force: {force}\nCamera Rotation: {camRot} ");
-       
+        
         rb.AddForce(force, ForceMode.Impulse);
         deltaVector = Vector2.zero;
 
@@ -167,11 +167,11 @@ public class BallController : MonoBehaviour
     private Vector3 ConstrainForce(Vector2 original) 
     {
         float x = original.x < 0 ?
-            Mathf.Max(original.x, -maxHorizontalLaunchForce) :
-            Mathf.Min(original.x, maxHorizontalLaunchForce);
+            Mathf.Max(original.x, -maxLeftRightLaunchForce) :
+            Mathf.Min(original.x, maxLeftRightLaunchForce);
         float y = original.y < 0 ?
-            Mathf.Max(original.y, -maxVerticalLaunchForce) :
-            Mathf.Min(original.y, maxVerticalLaunchForce);
+            Mathf.Max(original.y, -maxForwardBackwardLaunchForce) :
+            Mathf.Min(original.y, maxForwardBackwardLaunchForce);
         return new Vector3(x, 0, y);
     }
     public void TogglePauseControls()
