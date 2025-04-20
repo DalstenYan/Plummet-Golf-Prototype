@@ -2697,6 +2697,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: StrokeCanvas
       objectReference: {fileID: 0}
+    - target: {fileID: 5783645473644837310, guid: 8958b07b001b65c44a1c39d5d5022e75, type: 3}
+      propertyPath: m_fontStyle
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6533597397650275360, guid: 8958b07b001b65c44a1c39d5d5022e75, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -2712,14 +2716,6 @@ PrefabInstance:
     - target: {fileID: 6533597397650275360, guid: 8958b07b001b65c44a1c39d5d5022e75, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7114036248293497715, guid: 8958b07b001b65c44a1c39d5d5022e75, type: 3}
-      propertyPath: m_Spacing
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 7114036248293497715, guid: 8958b07b001b65c44a1c39d5d5022e75, type: 3}
-      propertyPath: m_ChildAlignment
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7903157916045811960, guid: 8958b07b001b65c44a1c39d5d5022e75, type: 3}
       propertyPath: m_SizeDelta.x
@@ -3164,19 +3160,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4579827390231761759, guid: 4ea293fb32c83574eb8770d378b3b01e, type: 3}
       propertyPath: field of view
-      value: 60.000004
+      value: 60
       objectReference: {fileID: 0}
     - target: {fileID: 7892425319439154927, guid: 4ea293fb32c83574eb8770d378b3b01e, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -13.315001
       objectReference: {fileID: 0}
     - target: {fileID: 7892425319439154927, guid: 4ea293fb32c83574eb8770d378b3b01e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -11.047001
       objectReference: {fileID: 0}
     - target: {fileID: 7892425319439154927, guid: 4ea293fb32c83574eb8770d378b3b01e, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -5
+      value: -12.128
       objectReference: {fileID: 0}
     - target: {fileID: 9059205801016213574, guid: 4ea293fb32c83574eb8770d378b3b01e, type: 3}
       propertyPath: m_Name
@@ -6509,7 +6505,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1003455051989110160, guid: ae226848e2261804c824f43f4151b150, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1276461572345310309, guid: ae226848e2261804c824f43f4151b150, type: 3}
       propertyPath: m_LocalPosition.x
@@ -6562,6 +6558,10 @@ PrefabInstance:
     - target: {fileID: 2229359607109330559, guid: ae226848e2261804c824f43f4151b150, type: 3}
       propertyPath: m_LocalPosition.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6968862157668133774, guid: ae226848e2261804c824f43f4151b150, type: 3}
+      propertyPath: animationName
+      value: TestDollyCam
       objectReference: {fileID: 0}
     - target: {fileID: 7461268547918391910, guid: ae226848e2261804c824f43f4151b150, type: 3}
       propertyPath: m_SplineSettings.Position
