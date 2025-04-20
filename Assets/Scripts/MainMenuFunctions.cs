@@ -6,7 +6,7 @@ public class MainMenuFunctions : MonoBehaviour
 {
     public void LoadGameLevel1()
     {
-        SceneManager.LoadScene("Level1");
+        SceneManager.LoadScene("KadenDesign");
         Debug.Log("Holy moly you're playing the game frfr ong");
     }
 
@@ -18,7 +18,7 @@ public class MainMenuFunctions : MonoBehaviour
 
     public void LoadGameLevel3()
     {
-        SceneManager.LoadScene("Level3");
+        SceneManager.LoadScene("JackTestScene");
         Debug.Log("Holy moly you're playing the game 3 frfr ong");
     }
 
