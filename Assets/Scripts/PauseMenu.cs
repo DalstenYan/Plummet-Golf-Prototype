@@ -14,6 +14,7 @@ public class PauseMenu : MonoBehaviour
     /// </summary>
     void Awake()
     {
+        Time.timeScale = 1;
         pauseMenu = this;
         gameObject.SetActive(false);
     }
@@ -51,7 +52,7 @@ public class PauseMenu : MonoBehaviour
     /// </summary>
     private void PauseActivate()
     {
-        if (isPause == false)
+        if (!isPause)
         {
             Time.timeScale = 0;
             Cursor.visible = true;
