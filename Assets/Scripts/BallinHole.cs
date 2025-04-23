@@ -11,6 +11,7 @@ public class BallinHole : MonoBehaviour
     [SerializeField] private BallController ballController;
     [SerializeField] private TMP_Text strokeText;
     [SerializeField] private AudioClip ballInHoleSound;
+    [SerializeField] private GameObject ball;
 
 
 
@@ -37,6 +38,7 @@ public class BallinHole : MonoBehaviour
             stopwatchCounter.Stop();
             stopwatchCounter.Reset();
             GameObject.FindWithTag("Player").GetComponent<BallController>().TogglePauseControls();
+            ball.SetActive(false);
         }
     }
 
