@@ -5,7 +5,7 @@ public class MainMenuFunctions : MonoBehaviour
 {
     public void LoadGameLevel1()
     {
-        SceneManager.LoadScene("KadenDesign");
+        SceneManager.LoadScene("Level1");
         Debug.Log("Holy moly you're playing the game frfr ong");
     }
 
