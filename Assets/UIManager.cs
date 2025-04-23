@@ -11,13 +11,15 @@ public class UIManager : MonoBehaviour
     private Stack<char> tallyChars;
     [SerializeField]
     private TextMeshProUGUI tallyText;
-    private int totalStrokes;
+
+    private GameObject bobbingPlayerArrow;
 
 
     void Awake()
     {
         Instance = this;
         tallyChars = new Stack<char>();
+        bobbingPlayerArrow = GameObject.Find("Indicator Arrow");
     }
 
     public void UpdateTallyStrokes() 
@@ -42,5 +44,10 @@ public class UIManager : MonoBehaviour
         {
             tallyText.text += c;
         }
+    }
+
+    public void EnableDisableArrow(bool canLaunch) 
+    {
+        bobbingPlayerArrow.SetActive(canLaunch);
     }
 }
