@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
+  m_SkyboxMaterial: {fileID: 2100000, guid: 3e5399bd195de7649b874f58c1b9f8a3, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -411,6 +411,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8944827356341526388, guid: 7a9cdc70b6b0ca44da9e0d6d3538e752, type: 3}
+      propertyPath: ball
+      value: 
+      objectReference: {fileID: 1040872616}
+    - target: {fileID: 8944827356341526388, guid: 7a9cdc70b6b0ca44da9e0d6d3538e752, type: 3}
+      propertyPath: WinScreen
+      value: 
+      objectReference: {fileID: 1343908196}
+    - target: {fileID: 8944827356341526388, guid: 7a9cdc70b6b0ca44da9e0d6d3538e752, type: 3}
+      propertyPath: strokeText
+      value: 
+      objectReference: {fileID: 1343908197}
+    - target: {fileID: 8944827356341526388, guid: 7a9cdc70b6b0ca44da9e0d6d3538e752, type: 3}
+      propertyPath: ballController
+      value: 
+      objectReference: {fileID: 1040872617}
+    - target: {fileID: 8944827356341526388, guid: 7a9cdc70b6b0ca44da9e0d6d3538e752, type: 3}
+      propertyPath: ballInHoleSound
+      value: 
+      objectReference: {fileID: 8300000, guid: c89f4f9d718f9a84b94a47f6c4fb01fb, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -7215,6 +7235,22 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2dd40a81567ec2045a922ac576065c0f, type: 3}
+--- !u!1 &1040872616 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5327946756606020212, guid: 2dd40a81567ec2045a922ac576065c0f, type: 3}
+  m_PrefabInstance: {fileID: 1040872615}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1040872617 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1230074831747348116, guid: 2dd40a81567ec2045a922ac576065c0f, type: 3}
+  m_PrefabInstance: {fileID: 1040872615}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1040872616}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a01698bcd4f07f4caef15ff780d7826, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1074169985
 GameObject:
   m_ObjectHideFlags: 0
@@ -8826,6 +8862,22 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e4a759a0d7ea2b94c85369fe0c9e5f2b, type: 3}
+--- !u!1 &1343908196 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7120303538729810270, guid: e4a759a0d7ea2b94c85369fe0c9e5f2b, type: 3}
+  m_PrefabInstance: {fileID: 1343908195}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1343908197 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 925054190780906825, guid: e4a759a0d7ea2b94c85369fe0c9e5f2b, type: 3}
+  m_PrefabInstance: {fileID: 1343908195}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1372820427
 GameObject:
   m_ObjectHideFlags: 0
