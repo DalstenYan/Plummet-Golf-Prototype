@@ -17,7 +17,7 @@ public class MainMenuFunctions : MonoBehaviour
 
     public void LoadGameLevel3()
     {
-        SceneManager.LoadScene("JackTestScene");
+        SceneManager.LoadScene("Level3");
         Debug.Log("Holy moly you're playing the game 3 frfr ong");
     }
 
