@@ -60,7 +60,7 @@ GameObject:
   - component: {fileID: 7461268547918391910}
   - component: {fileID: 8421856426405547781}
   m_Layer: 0
-  m_Name: Dolly Cam
+  m_Name: Intro Dolly Cam
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
