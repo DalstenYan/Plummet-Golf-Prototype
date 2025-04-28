@@ -11,7 +11,6 @@ public class BallController : MonoBehaviour
     [Header("Ball Settings")]
     [SerializeField]
     private float maxLeftRightLaunchForce, maxForwardBackwardLaunchForce;
-
     [SerializeField]
     private float leftRightDragSensitivity, forwardBackwardDragSensitivity;
 
@@ -26,10 +25,17 @@ public class BallController : MonoBehaviour
     private LineRenderer lr;
     private bool linerendering;
     private bool canLaunchBall;
+    public bool inCutscene;
 
     [Header("Audio")]
     [SerializeField] private AudioClip swingSound;
     [SerializeField] private AudioClip rollSound;
+
+    private void Awake()
+    {
+        playerInput = GetComponent<PlayerInput>();
+        inCutscene = true;
+    }
 
     void Start()
     {
@@ -37,7 +43,6 @@ public class BallController : MonoBehaviour
         cinemachineCamera.Follow = GameObject.FindWithTag("BallFollower").transform;
         lookController = GetComponentInChildren<CinemachineInputAxisController>();
         rb = GetComponent<Rigidbody>();
-        playerInput = GetComponent<PlayerInput>();
         saveLastLocation = GetComponent<SaveLastLocation>();
         lr = GetComponent<LineRenderer>();
 
@@ -49,10 +54,13 @@ public class BallController : MonoBehaviour
 
         Cursor.lockState = CursorLockMode.Confined;
         Cursor.visible = true;
-        
+
     }
+
+
     private void FixedUpdate()
     {
+        
         BallControl();
         //Line Rendering
         if(linerendering)
@@ -76,7 +84,7 @@ public class BallController : MonoBehaviour
         }
         //Debug.Log("Linear: " + rb.linearVelocity + " || Angular: " + rb.angularVelocity);
     }
-
+    #region InputActions
     /// <summary>
     /// Registers the drag input from users
     /// </summary>
@@ -123,6 +131,21 @@ public class BallController : MonoBehaviour
             Cursor.lockState = CursorLockMode.Confined;
         }
     }
+    public void OnLastLocationInput(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            
+            saveLastLocation.backToLastLocation();
+        }
+    }
+    public void SkipCutscene(InputAction.CallbackContext context) 
+    {
+        if (context.performed && inCutscene) 
+        {
+            GameObject.FindGameObjectWithTag("IntroCam").GetComponent<MiscCameraControls>().AssignHardCut();
+        }
+    }
 
     public void OnPauseInput(InputAction.CallbackContext context)
     {
@@ -140,10 +163,13 @@ public class BallController : MonoBehaviour
         var delta = context.ReadValue<Vector2>();
         deltaVector -= delta;
     }
-
+    #endregion
     private void BallControl() 
     {
-        canLaunchBall = rb.linearVelocity.x <= 0.2 && rb.linearVelocity.y == 0 && rb.linearVelocity.z <= 0.2;
+        canLaunchBall = rb.linearVelocity.x <= 0.1 && 
+                        rb.linearVelocity.y == 0 && 
+                        rb.linearVelocity.z <= 0.1 && 
+                        !inCutscene;
         UIManager.Instance.EnableDisableArrow(canLaunchBall);
     }
 
@@ -191,13 +217,6 @@ public class BallController : MonoBehaviour
 
         playerInput.SwitchCurrentActionMap(playerInput.currentActionMap.name == "Player" ? "UI" : "Player");
         //Debug.Log("Action Map Changed to: " + playerInput.currentActionMap);
-    }
-    public void OnLastLocationInput(InputAction.CallbackContext context)
-    {
-        if (context.performed)
-        {
-            saveLastLocation.backToLastLocation();
-        }
     }
     public void ResetForce()
     {
