@@ -6,19 +6,25 @@ using UnityEngine;
 public class PanelFade : MonoBehaviour
 {
     private bool faded = false;
-    [SerializeField] private float timer = 3f; // Countdown before fade
-    [SerializeField] private float duration = 1f; // Duration of fade
-    private bool itHappened = false;
+    [SerializeField] private float timer;
+    [SerializeField] private float duration = 1f; 
+    private bool itHappened;
+    public GameObject panel;
 
     CanvasGroup canGroup;
 
     private void Start()
     {
+        timer = 2f;
         canGroup = GetComponent<CanvasGroup>();
         Debug.Log("still working");
 
         
         StartCoroutine(StartFadeAfterDelay());
+        if (itHappened == true)
+        {
+            Destroy(panel);
+        }
     }
 
     private IEnumerator StartFadeAfterDelay()
@@ -32,12 +38,14 @@ public class PanelFade : MonoBehaviour
         }
 
         fade();
+
     }
 
     public void fade()
     {
         StartCoroutine(DoFade(canGroup.alpha, faded ? 1 : 0));
         faded = !faded;
+
     }
 
     public IEnumerator DoFade(float start, float end)
@@ -55,6 +63,8 @@ public class PanelFade : MonoBehaviour
         if (canGroup.alpha <= 0)
         {
             itHappened = true;
+            Destroy(panel);
         }
+
     }
 }
