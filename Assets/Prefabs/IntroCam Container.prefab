@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1276461572345310309}
-  - component: {fileID: 6968862157668133774}
+  - component: {fileID: 971491090942592469}
   m_Layer: 0
   m_Name: IntroCam Container
   m_TagString: Untagged
@@ -34,7 +34,7 @@ Transform:
   - {fileID: 5927357312007939608}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6968862157668133774
+--- !u!114 &971491090942592469
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -59,9 +59,10 @@ GameObject:
   - component: {fileID: 31820012458172378}
   - component: {fileID: 7461268547918391910}
   - component: {fileID: 8421856426405547781}
+  - component: {fileID: 4328327882926341196}
   m_Layer: 0
-  m_Name: Dolly Cam
-  m_TagString: Untagged
+  m_Name: Intro Dolly Cam
+  m_TagString: IntroCam
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -180,6 +181,19 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &4328327882926341196
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1727889529095348349}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f912df705202dfc499cc1760dba24794, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  settings: {fileID: 11400000, guid: 15a02435c0a58ee4ea26c0c74e598520, type: 2}
 --- !u!1 &8358888677496165141
 GameObject:
   m_ObjectHideFlags: 0

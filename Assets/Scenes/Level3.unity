@@ -19682,6 +19682,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 971491090942592469, guid: ae226848e2261804c824f43f4151b150, type: 3}
+      propertyPath: animationName
+      value: Lvl3DollyCam
+      objectReference: {fileID: 0}
     - target: {fileID: 1003455051989110160, guid: ae226848e2261804c824f43f4151b150, type: 3}
       propertyPath: m_Name
       value: IntroCam Container

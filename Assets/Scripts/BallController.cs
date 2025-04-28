@@ -8,28 +8,34 @@ public class BallController : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     Rigidbody rb;
+    [Header("Ball Settings")]
     [SerializeField]
     private float maxLeftRightLaunchForce, maxForwardBackwardLaunchForce;
+    [SerializeField]
+    private float leftRightDragSensitivity, forwardBackwardDragSensitivity;
+
+    public int strokes = 0;
+    private SaveLastLocation saveLastLocation;
     CinemachineInputAxisController lookController;
     CinemachineCamera cinemachineCamera;
     private double pauseInputTime;
     private PlayerInput playerInput;
-
-    public int strokes=0;
-    [SerializeField] private TMP_Text stroketext;
-
-    private SaveLastLocation saveLastLocation;
-
-    [SerializeField]
-    private float leftRightDragSensitivity, forwardBackwardDragSensitivity;
-
     private Vector2 deltaVector;
 
     private LineRenderer lr;
     private bool linerendering;
+    private bool canLaunchBall;
+    public bool inCutscene;
 
+    [Header("Audio")]
     [SerializeField] private AudioClip swingSound;
     [SerializeField] private AudioClip rollSound;
+
+    private void Awake()
+    {
+        playerInput = GetComponent<PlayerInput>();
+        inCutscene = true;
+    }
 
     void Start()
     {
@@ -37,7 +43,6 @@ public class BallController : MonoBehaviour
         cinemachineCamera.Follow = GameObject.FindWithTag("BallFollower").transform;
         lookController = GetComponentInChildren<CinemachineInputAxisController>();
         rb = GetComponent<Rigidbody>();
-        playerInput = GetComponent<PlayerInput>();
         saveLastLocation = GetComponent<SaveLastLocation>();
         lr = GetComponent<LineRenderer>();
 
@@ -49,10 +54,15 @@ public class BallController : MonoBehaviour
 
         Cursor.lockState = CursorLockMode.Confined;
         Cursor.visible = true;
-        
+
     }
+
+
     private void FixedUpdate()
     {
+        
+        BallControl();
+        //Line Rendering
         if(linerendering)
         {
             lr.positionCount = 2;
@@ -72,15 +82,22 @@ public class BallController : MonoBehaviour
         {
             lr.positionCount = 0;
         }
+        //Debug.Log("Linear: " + rb.linearVelocity + " || Angular: " + rb.angularVelocity);
     }
-
+    #region InputActions
     /// <summary>
     /// Registers the drag input from users
     /// </summary>
     /// <param name="context"></param>
     public void OnTapOrDragInput(InputAction.CallbackContext context) 
     {
-        //Debug.Log(context.interaction + ": " + context.phase);
+        //Catch player when they're trying to launch without ball slowed down
+        if (!canLaunchBall) 
+        {
+            Debug.Log("CANNOT LAUNCH BALL YET");
+            return;
+        }
+
         if (context.started && context.interaction is TapInteraction)
         {
             //Debug.Log("Force Reset");
@@ -114,6 +131,21 @@ public class BallController : MonoBehaviour
             Cursor.lockState = CursorLockMode.Confined;
         }
     }
+    public void OnLastLocationInput(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            
+            saveLastLocation.backToLastLocation();
+        }
+    }
+    public void SkipCutscene(InputAction.CallbackContext context) 
+    {
+        if (context.performed && inCutscene) 
+        {
+            GameObject.FindGameObjectWithTag("IntroCam").GetComponent<MiscCameraControls>().AssignHardCut();
+        }
+    }
 
     public void OnPauseInput(InputAction.CallbackContext context)
     {
@@ -131,6 +163,15 @@ public class BallController : MonoBehaviour
         var delta = context.ReadValue<Vector2>();
         deltaVector -= delta;
     }
+    #endregion
+    private void BallControl() 
+    {
+        canLaunchBall = rb.linearVelocity.x <= 0.1 && 
+                        rb.linearVelocity.y == 0 && 
+                        rb.linearVelocity.z <= 0.1 && 
+                        !inCutscene;
+        UIManager.Instance.EnableDisableArrow(canLaunchBall);
+    }
 
     private void LaunchBall() 
     {
@@ -140,28 +181,25 @@ public class BallController : MonoBehaviour
         AudioSource.PlayClipAtPoint(swingSound, transform.position);
         AudioSource.PlayClipAtPoint(rollSound, transform.position);
         UIManager.Instance.UpdateTallyStrokes();
-        //UpdateUI();
-        deltaVector /= 100f;
-
         linerendering = false;
-        //Multiply by camera rotation
+
+        //Divide large delta and apply sensitivity
+        deltaVector /= 100f;
         deltaVector.y *= forwardBackwardDragSensitivity;
         deltaVector.x *= leftRightDragSensitivity;
+
+        //Multiply by camera rotation
         var camRot = Camera.main.transform.rotation;
         Vector3 force = camRot * ConstrainForce(deltaVector);
         force.y = 0;
-        Debug.Log($" Delta Input: {deltaVector} \tFinal Force: {force}\nCamera Rotation: {camRot} ");
-        
+        //Apply final force
         rb.AddForce(force, ForceMode.Impulse);
-        deltaVector = Vector2.zero;
+        Debug.Log($" Delta Input: {deltaVector} \tFinal Force: {force}\nCamera Rotation: {camRot} ");
 
+        //Reset delta and cursor
+        deltaVector = Vector2.zero;
         Cursor.lockState = CursorLockMode.Confined;
         Cursor.visible = true;
-    }
-    private void UpdateUI() 
-    {
-        stroketext.text = "Strokes: " + strokes;
-        
     }
 
     private Vector3 ConstrainForce(Vector2 original) 
@@ -179,13 +217,6 @@ public class BallController : MonoBehaviour
 
         playerInput.SwitchCurrentActionMap(playerInput.currentActionMap.name == "Player" ? "UI" : "Player");
         //Debug.Log("Action Map Changed to: " + playerInput.currentActionMap);
-    }
-    public void OnLastLocationInput(InputAction.CallbackContext context)
-    {
-        if (context.performed)
-        {
-            saveLastLocation.backToLastLocation();
-        }
     }
     public void ResetForce()
     {
