@@ -11,7 +11,6 @@ public class BallController : MonoBehaviour
     [Header("Ball Settings")]
     [SerializeField]
     private float maxLeftRightLaunchForce, maxForwardBackwardLaunchForce;
-
     [SerializeField]
     private float leftRightDragSensitivity, forwardBackwardDragSensitivity;
 
@@ -26,10 +25,17 @@ public class BallController : MonoBehaviour
     private LineRenderer lr;
     private bool linerendering;
     private bool canLaunchBall;
+    public bool inCutscene;
 
     [Header("Audio")]
     [SerializeField] private AudioClip swingSound;
     [SerializeField] private AudioClip rollSound;
+
+    private void Awake()
+    {
+        playerInput = GetComponent<PlayerInput>();
+        inCutscene = true;
+    }
 
     void Start()
     {
@@ -37,7 +43,6 @@ public class BallController : MonoBehaviour
         cinemachineCamera.Follow = GameObject.FindWithTag("BallFollower").transform;
         lookController = GetComponentInChildren<CinemachineInputAxisController>();
         rb = GetComponent<Rigidbody>();
-        playerInput = GetComponent<PlayerInput>();
         saveLastLocation = GetComponent<SaveLastLocation>();
         lr = GetComponent<LineRenderer>();
 
@@ -49,10 +54,13 @@ public class BallController : MonoBehaviour
 
         Cursor.lockState = CursorLockMode.Confined;
         Cursor.visible = true;
-        
+
     }
+
+
     private void FixedUpdate()
     {
+        
         BallControl();
         //Line Rendering
         if(linerendering)
@@ -133,10 +141,9 @@ public class BallController : MonoBehaviour
     }
     public void SkipCutscene(InputAction.CallbackContext context) 
     {
-        if (context.performed) 
+        if (context.performed && inCutscene) 
         {
-            Camera.main.GetComponent<MiscCameraControls>().AssignHardCut();
-            GameObject.Find("IntroCam Container").SetActive(false);
+            GameObject.FindGameObjectWithTag("IntroCam").GetComponent<MiscCameraControls>().AssignHardCut();
         }
     }
 
@@ -159,7 +166,10 @@ public class BallController : MonoBehaviour
     #endregion
     private void BallControl() 
     {
-        canLaunchBall = rb.linearVelocity.x <= 0.2 && rb.linearVelocity.y == 0 && rb.linearVelocity.z <= 0.2;
+        canLaunchBall = rb.linearVelocity.x <= 0.1 && 
+                        rb.linearVelocity.y == 0 && 
+                        rb.linearVelocity.z <= 0.1 && 
+                        !inCutscene;
         UIManager.Instance.EnableDisableArrow(canLaunchBall);
     }
 

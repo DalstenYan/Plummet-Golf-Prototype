@@ -6,6 +6,7 @@ TagManager:
   tags:
   - BallFollower
   - Killbox
+  - IntroCam
   layers:
   - Default
   - TransparentFX
