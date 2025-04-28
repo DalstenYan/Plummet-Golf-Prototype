@@ -183,9 +183,8 @@ public class BallController : MonoBehaviour
     #endregion
     private void BallControl() 
     {
-        canLaunchBall = rb.linearVelocity.x <= 0.1 && 
+        canLaunchBall = rb.linearVelocity.magnitude < 0.05f && 
                         rb.linearVelocity.y == 0 && 
-                        rb.linearVelocity.z <= 0.1 && 
                         !inCutscene;
         UIManager.Instance.EnableDisableArrow(canLaunchBall);
     }
