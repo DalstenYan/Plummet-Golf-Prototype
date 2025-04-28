@@ -1,5 +1,8 @@
+using NUnit.Framework;
+using System.Collections.Generic;
 using TMPro;
 using Unity.Cinemachine;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Interactions;
@@ -31,10 +34,15 @@ public class BallController : MonoBehaviour
     [SerializeField] private AudioClip swingSound;
     [SerializeField] private AudioClip rollSound;
 
+    [Header("Line Rendering")]
+    [SerializeField] private List<Material> lineColors;
+    private int breakpoint;
+
     private void Awake()
     {
         playerInput = GetComponent<PlayerInput>();
         inCutscene = true;
+        breakpoint = (int) maxForwardBackwardLaunchForce / lineColors.Count;
     }
 
     void Start()
@@ -76,7 +84,16 @@ public class BallController : MonoBehaviour
             
             force.y=0;
             lr.SetPosition(1, transform.position+force);
-
+            //Line Color
+            if (force.magnitude >= breakpoint)
+            {
+                int colIndex = Mathf.Min(Mathf.FloorToInt( force.magnitude / breakpoint), lineColors.Count - 1);
+                lr.material = lineColors[colIndex];
+            }
+            else 
+            {
+                lr.material = lineColors[0];
+            }
         }
         else
         {
