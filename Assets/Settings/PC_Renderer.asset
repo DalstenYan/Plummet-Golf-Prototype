@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-7892410338887257099
+--- !u!114 &-3216196109651622089
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -14,13 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Active: 1
   settings:
-    passTag: RenderObjects
+    passTag: BallNotOccluded
     Event: 300
     filterSettings:
       RenderQueueType: 0
       LayerMask:
         serializedVersion: 2
-        m_Bits: 0
+        m_Bits: 128
       PassNames: []
     overrideMaterial: {fileID: 0}
     overrideMaterialPassIndex: 0
@@ -84,7 +84,7 @@ MonoBehaviour:
       restoreCamera: 1
       offset: {x: 0, y: 0, z: 0, w: 0}
       cameraFieldOfView: 60
---- !u!114 &-2642652018167845748
+--- !u!114 &-2743522489474484314
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -196,9 +196,9 @@ MonoBehaviour:
   - {fileID: 7833122117494664109}
   - {fileID: -3020064913467402927}
   - {fileID: -1627025083726314591}
-  - {fileID: -2642652018167845748}
-  - {fileID: -7892410338887257099}
-  m_RendererFeatureMap: ad6b866f10d7b46c51952752f69216d6a1c3d7834ea56be98cec22a8fd6953dbf53301d19c867892
+  - {fileID: -2743522489474484314}
+  - {fileID: -3216196109651622089}
+  m_RendererFeatureMap: ad6b866f10d7b46c51952752f69216d6a1c3d7834ea56be9a6f793e5d40cedd937c738acadc65dd3
   m_UseNativeRenderPass: 1
   xrSystemData: {fileID: 0}
   postProcessData: {fileID: 11400000, guid: 41439944d30ece34e96484bdb6645b55, type: 2}
