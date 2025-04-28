@@ -1310,8 +1310,14 @@ MonoBehaviour:
   leftRightDragSensitivity: 9.8
   forwardBackwardDragSensitivity: 7
   strokes: 0
+  inCutscene: 0
   swingSound: {fileID: 8300000, guid: 0f56c4d55229a8f479a2e347b8651cd4, type: 3}
   rollSound: {fileID: 8300000, guid: ab6db54ed1631f245869eded3ceb4d7f, type: 3}
+  lineColors:
+  - {fileID: 2100000, guid: dc5509c29b1cdb44092c9b5f1232a708, type: 2}
+  - {fileID: 2100000, guid: 3759871f00d0fc24bab7ec8b511889bd, type: 2}
+  - {fileID: 2100000, guid: 2d6fba6685d3a3a4796b256a8b21f7a1, type: 2}
+  - {fileID: 2100000, guid: 4f9e1922e48851d4fb35297a087b2840, type: 2}
 --- !u!114 &-1156795558948715770
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1348,7 +1354,7 @@ LineRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 1ad861787e8400a44a01166a5ab39de7, type: 2}
+  - {fileID: 2100000, guid: dc5509c29b1cdb44092c9b5f1232a708, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
