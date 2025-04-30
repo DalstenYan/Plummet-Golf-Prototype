@@ -18,21 +18,24 @@ public class PanelFade : MonoBehaviour
         timer = 2f;
         canGroup = GetComponent<CanvasGroup>();
         Debug.Log("still working");
-
+        Time.timeScale = 1f;
         
         StartCoroutine(StartFadeAfterDelay());
-        if (itHappened == true)
-        {
-            Destroy(panel);
-        }
+
+
+       // if (itHappened == true)
+       // {
+         //   Destroy(panel);
+       // }
     }
 
     private IEnumerator StartFadeAfterDelay()
     {
-    
+        
         float countdown = timer;
         while (countdown > 0)
         {
+            Debug.Log("This is working");
             countdown -= Time.deltaTime;
             yield return null;
         }
@@ -45,13 +48,13 @@ public class PanelFade : MonoBehaviour
     {
         StartCoroutine(DoFade(canGroup.alpha, faded ? 1 : 0));
         faded = !faded;
-
+        Debug.Log("this is still working");
     }
 
     public IEnumerator DoFade(float start, float end)
     {
         float counter = 0.0f;
-
+        Debug.Log("Is this working");
         while (counter < duration)
         {
             counter += Time.deltaTime;
@@ -63,7 +66,8 @@ public class PanelFade : MonoBehaviour
         if (canGroup.alpha <= 0)
         {
             itHappened = true;
-            Destroy(panel);
+            //Destroy(panel);
+            panel.SetActive(false);
         }
 
     }
