@@ -1310,7 +1310,7 @@ MonoBehaviour:
   leftRightDragSensitivity: 9.8
   forwardBackwardDragSensitivity: 7
   strokes: 0
-  inCutscene: 0
+  inCutscene: 1
   swingSound: {fileID: 8300000, guid: 0f56c4d55229a8f479a2e347b8651cd4, type: 3}
   rollSound: {fileID: 8300000, guid: ab6db54ed1631f245869eded3ceb4d7f, type: 3}
   lineColors:
