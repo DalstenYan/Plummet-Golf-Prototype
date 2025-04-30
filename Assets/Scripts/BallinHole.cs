@@ -12,7 +12,7 @@ public class BallinHole : MonoBehaviour
     [SerializeField] private TMP_Text strokeText;
     [SerializeField] private AudioClip ballInHoleSound;
     [SerializeField] private GameObject ball;
-
+    [SerializeField] private float size = 0.75f;
 
 
     // Update is called once per frame
@@ -44,6 +44,6 @@ public class BallinHole : MonoBehaviour
 
     private bool NearGoal()
     {
-        return Physics.CheckSphere(winCheck.transform.position, .75f, _layerMask);
+        return Physics.CheckSphere(winCheck.transform.position, size, _layerMask);
     }
 }
