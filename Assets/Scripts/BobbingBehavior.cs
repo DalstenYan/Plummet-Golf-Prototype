@@ -13,12 +13,12 @@ public class BobbingBehavior : MonoBehaviour
 
     private void Awake()
     {
+        Debug.Log("World Space Rotation: " + transform.rotation + "Local Space Rotation: " + transform.localRotation);
         rotatedZ = 45f;
         bottomPos = transform.localPosition;
     }
     void OnEnable()
     {
-        Debug.Log("World Space: " + transform.position + " || Local Space: " + transform.localPosition);
         transform.localPosition = bottomPos;
         StartCoroutine(BobUpAndDown());
     }
@@ -37,23 +37,6 @@ public class BobbingBehavior : MonoBehaviour
 
         transform.localPosition = goal;
         StartCoroutine(BobUpAndDown());
-    }
-
-    private void FixedUpdate()
-    {
-        //transform.rotation = new Quaternion(transform.rotation.x, Camera.main.transform.rotation.y, transform.rotation.z, Camera.main.transform.rotation.w); 
-        //transform.RotateAround(Vector3.zero, Camera.main.transform.up, );
-        //var rot = Camera.main.transform.rotation;
-        //rot.z = 45;
-        //rot.y = 0;
-        //rot.x = 0;
-        //rot.w = 0;
-        //transform.rotation = rot;
-        Vector3 rot = Quaternion.LookRotation(Camera.main.transform.position - transform.position).eulerAngles;
-        rot.x = 0;
-        rot.z = rotatedZ;
-        transform.rotation = Quaternion.Euler(rot);
-
     }
 
 }

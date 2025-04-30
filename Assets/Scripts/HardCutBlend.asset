@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CustomBlends:
   - From: Intro Dolly Cam
-    To: PanAndLookCam
+    To: Golf Follow Cam
     Blend:
       Style: 0
       Time: 0

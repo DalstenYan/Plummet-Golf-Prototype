@@ -13,21 +13,24 @@ public class BallController : MonoBehaviour
     Rigidbody rb;
     [Header("Ball Settings")]
     [SerializeField]
+    private Transform cameraFollowTransform;
+    [SerializeField]
+    private float leftRightPanSensitivity, upDownPanSensitivity;
+    [SerializeField]
     private float maxLeftRightLaunchForce, maxForwardBackwardLaunchForce;
     [SerializeField]
     private float leftRightDragSensitivity, forwardBackwardDragSensitivity;
 
     public int strokes = 0;
     private SaveLastLocation saveLastLocation;
-    CinemachineInputAxisController lookController;
-    CinemachineCamera cinemachineCamera;
     private double pauseInputTime;
     private PlayerInput playerInput;
-    private Vector2 deltaVector;
+    private Vector2 deltaVector, cameraDelta;
 
     private LineRenderer lr;
     private bool linerendering;
     private bool canLaunchBall;
+    private bool isPanning;
     public bool inCutscene;
 
     [Header("Audio")]
@@ -42,20 +45,20 @@ public class BallController : MonoBehaviour
     {
         playerInput = GetComponent<PlayerInput>();
         inCutscene = true;
+        isPanning = false;
         breakpoint = (int) maxForwardBackwardLaunchForce / lineColors.Count;
     }
 
     void Start()
     {
-        cinemachineCamera = GetComponentInChildren<CinemachineCamera>();
-        cinemachineCamera.Follow = GameObject.FindWithTag("BallFollower").transform;
-        lookController = GetComponentInChildren<CinemachineInputAxisController>();
+        //cinemachineCamera = GetComponentInChildren<CinemachineCamera>();
+       // cinemachineCamera.Follow = GameObject.FindWithTag("BallFollower").transform;
+        //lookController = GetComponentInChildren<CinemachineInputAxisController>();
         rb = GetComponent<Rigidbody>();
         saveLastLocation = GetComponent<SaveLastLocation>();
         lr = GetComponent<LineRenderer>();
 
-
-        lookController.enabled = false;
+        cameraDelta = cameraFollowTransform.eulerAngles;
 
         leftRightDragSensitivity /= 10f;
         forwardBackwardDragSensitivity /= 10f;
@@ -70,13 +73,14 @@ public class BallController : MonoBehaviour
     {
         
         BallControl();
+        CameraRotation();
         //Line Rendering
         if(linerendering)
         {
             lr.positionCount = 2;
             lr.SetPosition(0, transform.position);
             Vector3 temp = deltaVector;
-            temp /= 100f;
+            //temp /= 100f;
             temp.y *= forwardBackwardDragSensitivity;
             var camRot = Camera.main.transform.rotation;
             camRot.z = 0;
@@ -137,9 +141,8 @@ public class BallController : MonoBehaviour
         
         if (context.interaction is HoldInteraction)
         {
-            bool isPanning = !context.canceled;
+            isPanning = !context.canceled;
             Cursor.visible = !isPanning;
-            lookController.enabled = isPanning;
             Cursor.lockState = isPanning ? CursorLockMode.Locked : CursorLockMode.Confined;
             
         }
@@ -178,7 +181,16 @@ public class BallController : MonoBehaviour
     public void OnMouseDelta(InputAction.CallbackContext context) 
     {
         var delta = context.ReadValue<Vector2>();
-        deltaVector -= delta;
+        delta /= 100f;
+        if (isPanning)
+        {
+            cameraDelta -= delta;
+        }
+        else 
+        {
+            deltaVector -= delta;
+        }
+        
     }
     #endregion
     private void BallControl() 
@@ -187,6 +199,15 @@ public class BallController : MonoBehaviour
                         rb.linearVelocity.y == 0 && 
                         !inCutscene;
         UIManager.Instance.EnableDisableArrow(canLaunchBall);
+    }
+    private void CameraRotation() 
+    {
+        if (!isPanning)
+            return;
+        float xFloat = cameraDelta.y * upDownPanSensitivity;
+        float yFloat = cameraDelta.x * leftRightPanSensitivity;
+        xFloat = Mathf.Clamp(xFloat, -50f, 70f);
+        cameraFollowTransform.rotation = Quaternion.Euler(xFloat, yFloat, cameraFollowTransform.eulerAngles.z);
     }
 
     private void LaunchBall() 
@@ -200,7 +221,7 @@ public class BallController : MonoBehaviour
         linerendering = false;
 
         //Divide large delta and apply sensitivity
-        deltaVector /= 100f;
+        //deltaVector /= 100f;
         deltaVector.y *= forwardBackwardDragSensitivity;
         deltaVector.x *= leftRightDragSensitivity;
 

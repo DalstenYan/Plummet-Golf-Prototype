@@ -945,13 +945,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6087268223958445926}
+  - component: {fileID: 1230074831747348116}
+  - component: {fileID: -1156795558948715770}
   - component: {fileID: 7022866535520939095}
   - component: {fileID: 4925000592433623491}
   - component: {fileID: 4495022289344320507}
   - component: {fileID: 5867885912923819746}
   - component: {fileID: 5526939263759018140}
-  - component: {fileID: 1230074831747348116}
-  - component: {fileID: -1156795558948715770}
   - component: {fileID: 6227859166919931189}
   m_Layer: 0
   m_Name: GolfBallWorking
@@ -978,6 +978,44 @@ Transform:
   - {fileID: 2969956246242194076}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1230074831747348116
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5327946756606020212}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a01698bcd4f07f4caef15ff780d7826, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cameraFollowTransform: {fileID: 0}
+  maxLeftRightLaunchForce: 5
+  maxForwardBackwardLaunchForce: 20
+  leftRightDragSensitivity: 9.8
+  forwardBackwardDragSensitivity: 7
+  strokes: 0
+  inCutscene: 1
+  swingSound: {fileID: 8300000, guid: 0f56c4d55229a8f479a2e347b8651cd4, type: 3}
+  rollSound: {fileID: 8300000, guid: ab6db54ed1631f245869eded3ceb4d7f, type: 3}
+  lineColors:
+  - {fileID: 2100000, guid: dc5509c29b1cdb44092c9b5f1232a708, type: 2}
+  - {fileID: 2100000, guid: 3759871f00d0fc24bab7ec8b511889bd, type: 2}
+  - {fileID: 2100000, guid: 2d6fba6685d3a3a4796b256a8b21f7a1, type: 2}
+  - {fileID: 2100000, guid: 4f9e1922e48851d4fb35297a087b2840, type: 2}
+--- !u!114 &-1156795558948715770
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5327946756606020212}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25d92406dd0c6104b83d4ab07d585c26, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!33 &7022866535520939095
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -1293,43 +1331,6 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
---- !u!114 &1230074831747348116
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5327946756606020212}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1a01698bcd4f07f4caef15ff780d7826, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxLeftRightLaunchForce: 5
-  maxForwardBackwardLaunchForce: 20
-  leftRightDragSensitivity: 9.8
-  forwardBackwardDragSensitivity: 7
-  strokes: 0
-  inCutscene: 1
-  swingSound: {fileID: 8300000, guid: 0f56c4d55229a8f479a2e347b8651cd4, type: 3}
-  rollSound: {fileID: 8300000, guid: ab6db54ed1631f245869eded3ceb4d7f, type: 3}
-  lineColors:
-  - {fileID: 2100000, guid: dc5509c29b1cdb44092c9b5f1232a708, type: 2}
-  - {fileID: 2100000, guid: 3759871f00d0fc24bab7ec8b511889bd, type: 2}
-  - {fileID: 2100000, guid: 2d6fba6685d3a3a4796b256a8b21f7a1, type: 2}
-  - {fileID: 2100000, guid: 4f9e1922e48851d4fb35297a087b2840, type: 2}
---- !u!114 &-1156795558948715770
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5327946756606020212}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 25d92406dd0c6104b83d4ab07d585c26, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!120 &6227859166919931189
 LineRenderer:
   serializedVersion: 2

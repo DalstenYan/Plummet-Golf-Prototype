@@ -4,9 +4,10 @@
 TagManager:
   serializedVersion: 3
   tags:
-  - BallFollower
   - Killbox
   - IntroCam
+  - GolfBallCam
+  - BallFollower
   layers:
   - Default
   - TransparentFX

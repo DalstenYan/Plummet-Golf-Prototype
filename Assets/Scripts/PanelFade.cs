@@ -6,10 +6,8 @@ using UnityEngine;
 public class PanelFade : MonoBehaviour
 {
     private bool faded = false;
-    [SerializeField] private float timer;
-    [SerializeField] private float duration = 1f; 
-    private bool itHappened;
-    public GameObject panel;
+    [SerializeField] private float timer = 3f; // Countdown before fade
+    [SerializeField] private float duration = 1f; // Duration of fade
 
     CanvasGroup canGroup;
 
@@ -62,13 +60,5 @@ public class PanelFade : MonoBehaviour
 
             yield return null;
         }
-
-        if (canGroup.alpha <= 0)
-        {
-            itHappened = true;
-            //Destroy(panel);
-            panel.SetActive(false);
-        }
-
     }
 }
