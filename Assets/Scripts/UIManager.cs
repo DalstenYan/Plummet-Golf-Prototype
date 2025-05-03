@@ -10,7 +10,9 @@ public class UIManager : MonoBehaviour
 
     private Stack<char> tallyChars;
     [SerializeField]
-    private TextMeshProUGUI tallyText;
+    private TextMeshProUGUI tallyText, strokeText, osmText;
+
+    public bool OneShotMode = false;
 
     private GameObject bobbingPlayerArrow;
 
@@ -20,6 +22,12 @@ public class UIManager : MonoBehaviour
         Instance = this;
         tallyChars = new Stack<char>();
         bobbingPlayerArrow = GameObject.Find("Indicator Arrow");
+    }
+
+    public void ResetTallyStrokes() 
+    {
+        tallyChars.Clear();
+        tallyText.text = "0";
     }
 
     public void UpdateTallyStrokes() 
@@ -50,4 +58,13 @@ public class UIManager : MonoBehaviour
     {
         bobbingPlayerArrow.SetActive(canLaunch);
     }
+
+    [ContextMenu("Toggle One Shot Mode")]
+    public void ToggleOneShotMode() 
+    {
+        OneShotMode = !OneShotMode;
+        osmText.gameObject.SetActive(OneShotMode);
+        strokeText.text = OneShotMode ? "Attempts:" : "Strokes:";
+    }
+
 }
