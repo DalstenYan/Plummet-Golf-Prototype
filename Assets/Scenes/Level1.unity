@@ -1974,6 +1974,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6762360544022876194, guid: b0f9cd3cb4179004c925c6edfae0c64f, type: 3}
+      propertyPath: flagMaxHeight
+      value: -4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6762360544022876194, guid: b0f9cd3cb4179004c925c6edfae0c64f, type: 3}
+      propertyPath: flagMinHeight
+      value: -6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
