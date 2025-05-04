@@ -30,7 +30,7 @@ public class BallinHole : MonoBehaviour
 
         if(stopwatchCounter.ElapsedMilliseconds > 2500)
         {
-            strokeText.text = "    You finished the level in \r\n\t     " + ballController.strokes + " strokes!";
+            strokeText.text = UIManager.Instance.OneShotMode ? ("It took you " +ballController.strokes + " attempts to get a hole-in-one!") : ("You finished the level in\n" + ballController.strokes + " strokes!");
             AudioSource.PlayClipAtPoint(ballInHoleSound, transform.position);
             WinScreen.SetActive(true);
             Cursor.lockState = CursorLockMode.None;
@@ -39,6 +39,15 @@ public class BallinHole : MonoBehaviour
             stopwatchCounter.Reset();
             GameObject.FindWithTag("Player").GetComponent<BallController>().TogglePauseControls();
             ball.SetActive(false);
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.TryGetComponent<BallController>(out BallController ball)) 
+        {
+            print("Entered Goal");
+            ball.EnteredGoal();
         }
     }
 
