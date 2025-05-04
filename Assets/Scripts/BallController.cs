@@ -1,4 +1,5 @@
 using NUnit.Framework;
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using Unity.Cinemachine;
@@ -22,13 +23,17 @@ public class BallController : MonoBehaviour
     CinemachineInputAxisController lookController;
     CinemachineCamera cinemachineCamera;
     private double pauseInputTime;
+    private float oneShotAtRestTime;
     private PlayerInput playerInput;
     private Vector2 deltaVector;
 
     private LineRenderer lr;
-    private bool linerendering;
-    private bool canLaunchBall;
     public bool inCutscene;
+    private bool linerendering;
+    private bool canLaunchBall, ballLaunchedOnce;
+    private bool gameWon;
+    [SerializeField]
+    private bool oneShotMode;
 
     [Header("Audio")]
     [SerializeField] private AudioClip swingSound;
@@ -37,10 +42,13 @@ public class BallController : MonoBehaviour
     [Header("Line Rendering")]
     [SerializeField] private List<Material> lineColors;
     private int breakpoint;
+    private Vector3 levelStartPosition;
 
     private void Awake()
     {
+        levelStartPosition = transform.position;
         playerInput = GetComponent<PlayerInput>();
+        gameWon = ballLaunchedOnce = false;
         inCutscene = true;
         breakpoint = (int) maxForwardBackwardLaunchForce / lineColors.Count;
     }
@@ -76,7 +84,6 @@ public class BallController : MonoBehaviour
             lr.positionCount = 2;
             lr.SetPosition(0, transform.position);
             Vector3 temp = deltaVector;
-            temp /= 100f;
             temp.y *= forwardBackwardDragSensitivity;
             var camRot = Camera.main.transform.rotation;
             camRot.z = 0;
@@ -152,7 +159,6 @@ public class BallController : MonoBehaviour
     {
         if (context.performed)
         {
-            
             saveLastLocation.backToLastLocation();
         }
     }
@@ -178,14 +184,42 @@ public class BallController : MonoBehaviour
     public void OnMouseDelta(InputAction.CallbackContext context) 
     {
         var delta = context.ReadValue<Vector2>();
+        delta /= 100;
         deltaVector -= delta;
     }
     #endregion
     private void BallControl() 
     {
-        canLaunchBall = rb.linearVelocity.magnitude < 0.05f && 
-                        rb.linearVelocity.y == 0 && 
-                        !inCutscene;
+
+        if (oneShotMode) 
+        {
+            if (!ballLaunchedOnce && rb.linearVelocity.magnitude >= 0.05f) 
+            {
+                ballLaunchedOnce = true;
+            }
+
+            if (!gameWon && ballLaunchedOnce && rb.linearVelocity.magnitude <= 0.045f && Mathf.Abs(rb.linearVelocity.y) < 0.001f)
+            {
+                oneShotAtRestTime += Time.deltaTime;
+                Debug.Log("Timing rest...");
+                if (oneShotAtRestTime > 1.5f)
+                {
+                    transform.position = levelStartPosition;
+                    saveLastLocation.newLastLocation();
+                    oneShotAtRestTime = 0;
+                    ballLaunchedOnce = false;
+                    ResetForce();
+                }
+            }
+            else if (rb.linearVelocity.magnitude > 0.045f)
+            {
+                oneShotAtRestTime = Mathf.Max(oneShotAtRestTime - Time.deltaTime, 0);
+            }
+        }
+        canLaunchBall = rb.linearVelocity.magnitude < 0.0449f &&
+                        rb.linearVelocity.y == 0 &&
+                        !inCutscene && oneShotAtRestTime <= 0;
+
         UIManager.Instance.EnableDisableArrow(canLaunchBall);
     }
 
@@ -198,9 +232,9 @@ public class BallController : MonoBehaviour
         AudioSource.PlayClipAtPoint(rollSound, transform.position);
         UIManager.Instance.UpdateTallyStrokes();
         linerendering = false;
+        
 
         //Divide large delta and apply sensitivity
-        deltaVector /= 100f;
         deltaVector.y *= forwardBackwardDragSensitivity;
         deltaVector.x *= leftRightDragSensitivity;
 
@@ -209,7 +243,7 @@ public class BallController : MonoBehaviour
         Vector3 force = camRot * ConstrainForce(deltaVector);
         force.y = 0;
         //Apply final force
-        rb.AddForce(force, ForceMode.Impulse);
+        rb.AddForce(force, ForceMode.VelocityChange);
         Debug.Log($" Delta Input: {deltaVector} \tFinal Force: {force}\nCamera Rotation: {camRot} ");
 
         //Reset delta and cursor
@@ -218,16 +252,22 @@ public class BallController : MonoBehaviour
         Cursor.visible = true;
     }
 
-    private Vector3 ConstrainForce(Vector2 original) 
+    public void EnteredGoal() 
     {
-        float x = original.x < 0 ?
-            Mathf.Max(original.x, -maxLeftRightLaunchForce) :
-            Mathf.Min(original.x, maxLeftRightLaunchForce);
-        float y = original.y < 0 ?
-            Mathf.Max(original.y, -maxForwardBackwardLaunchForce) :
-            Mathf.Min(original.y, maxForwardBackwardLaunchForce);
-        return new Vector3(x, 0, y);
+        gameWon = inCutscene = true;
     }
+
+    public void ToggleOneShotMode() 
+    {
+        ResetForce();
+        ballLaunchedOnce = oneShotMode;
+        oneShotMode = !oneShotMode;
+        transform.position = levelStartPosition;
+        saveLastLocation.newLastLocation();
+        UIManager.Instance.ResetTallyStrokes();
+        oneShotAtRestTime = 0f;
+    }
+    
     public void TogglePauseControls()
     {
 
@@ -241,5 +281,15 @@ public class BallController : MonoBehaviour
         deltaVector = Vector2.zero;
         rb.angularVelocity = Vector3.zero;
         rb.linearVelocity = Vector3.zero;
+    }
+    private Vector3 ConstrainForce(Vector2 original)
+    {
+        float x = original.x < 0 ?
+            Mathf.Max(original.x, -maxLeftRightLaunchForce) :
+            Mathf.Min(original.x, maxLeftRightLaunchForce);
+        float y = original.y < 0 ?
+            Mathf.Max(original.y, -maxForwardBackwardLaunchForce) :
+            Mathf.Min(original.y, maxForwardBackwardLaunchForce);
+        return new Vector3(x, 0, y);
     }
 }

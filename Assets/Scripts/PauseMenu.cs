@@ -47,6 +47,13 @@ public class PauseMenu : MonoBehaviour
         SceneManager.LoadScene("MainMenu");
     }
 
+    public void OneShotMode() 
+    {
+        UIManager.Instance.ToggleOneShotMode();
+        GameObject.FindGameObjectWithTag("Player").GetComponent<BallController>().ToggleOneShotMode();
+        OnPause();
+    }
+
     /// <summary>
     /// Pause function to be easily reused in multiple places
     /// </summary>
