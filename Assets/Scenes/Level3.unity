@@ -17896,6 +17896,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 742269887}
     - target: {fileID: 8944827356341526388, guid: 7a9cdc70b6b0ca44da9e0d6d3538e752, type: 3}
+      propertyPath: size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8944827356341526388, guid: 7a9cdc70b6b0ca44da9e0d6d3538e752, type: 3}
       propertyPath: WinScreen
       value: 
       objectReference: {fileID: 1828919221}
