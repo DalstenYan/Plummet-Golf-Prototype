@@ -226,6 +226,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8733229915191316634}
   - component: {fileID: 8944827356341526388}
+  - component: {fileID: 1724108001388121676}
   m_Layer: 0
   m_Name: Hole
   m_TagString: Untagged
@@ -271,6 +272,32 @@ MonoBehaviour:
     m_Bits: 128
   winCheck: {fileID: 4693558666651949833}
   WinScreen: {fileID: 0}
+  ballController: {fileID: 0}
+  strokeText: {fileID: 0}
+  ballInHoleSound: {fileID: 0}
+  ball: {fileID: 0}
+  size: 0.75
+--- !u!65 &1724108001388121676
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4295145505494228291}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.35, y: 0.18, z: 0.35}
+  m_Center: {x: -0.25, y: 0, z: 0.05}
 --- !u!1 &4693558666651949833
 GameObject:
   m_ObjectHideFlags: 0
