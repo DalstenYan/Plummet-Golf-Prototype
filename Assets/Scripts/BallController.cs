@@ -1,4 +1,5 @@
 using NUnit.Framework;
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using Unity.Cinemachine;
@@ -22,6 +23,7 @@ public class BallController : MonoBehaviour
     CinemachineInputAxisController lookController;
     CinemachineCamera cinemachineCamera;
     private double pauseInputTime;
+    private float oneShotAtRestTime;
     private PlayerInput playerInput;
     private Vector2 deltaVector;
 
@@ -188,21 +190,36 @@ public class BallController : MonoBehaviour
     #endregion
     private void BallControl() 
     {
-        if (!ballLaunchedOnce && (rb.linearVelocity.magnitude >= 0.05f || rb.linearVelocity.y != 0)) 
-        {
-            ballLaunchedOnce = true;
-        }
 
-        if (oneShotMode && !gameWon && ballLaunchedOnce && rb.linearVelocity.magnitude <= 0.045f) 
+        if (oneShotMode) 
         {
-            ballLaunchedOnce = false;
-            saveLastLocation.backToLastLocation();
-            Debug.Log("One Shot Mode: Returned to Start");
+            if (!ballLaunchedOnce && rb.linearVelocity.magnitude >= 0.05f) 
+            {
+                ballLaunchedOnce = true;
+            }
+
+            if (!gameWon && ballLaunchedOnce && rb.linearVelocity.magnitude <= 0.045f && Mathf.Abs(rb.linearVelocity.y) < 0.001f)
+            {
+                oneShotAtRestTime += Time.deltaTime;
+                Debug.Log("Timing rest...");
+                if (oneShotAtRestTime > 1.5f)
+                {
+                    transform.position = levelStartPosition;
+                    saveLastLocation.newLastLocation();
+                    oneShotAtRestTime = 0;
+                    ballLaunchedOnce = false;
+                    ResetForce();
+                }
+            }
+            else if (rb.linearVelocity.magnitude > 0.045f)
+            {
+                oneShotAtRestTime = Mathf.Max(oneShotAtRestTime - Time.deltaTime, 0);
+            }
         }
         canLaunchBall = rb.linearVelocity.magnitude < 0.0449f &&
                         rb.linearVelocity.y == 0 &&
-                        !inCutscene;
-        
+                        !inCutscene && oneShotAtRestTime <= 0;
+
         UIManager.Instance.EnableDisableArrow(canLaunchBall);
     }
 
@@ -242,11 +259,13 @@ public class BallController : MonoBehaviour
 
     public void ToggleOneShotMode() 
     {
+        ResetForce();
+        ballLaunchedOnce = oneShotMode;
         oneShotMode = !oneShotMode;
         transform.position = levelStartPosition;
+        saveLastLocation.newLastLocation();
         UIManager.Instance.ResetTallyStrokes();
-        ResetForce();
-
+        oneShotAtRestTime = 0f;
     }
     
     public void TogglePauseControls()
